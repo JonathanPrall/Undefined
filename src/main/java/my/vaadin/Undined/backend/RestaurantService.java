@@ -17,32 +17,40 @@ public class RestaurantService {
 
     private static RestaurantService instance;
 
+    
+    private static String[] namePrefixes = {"Mc", "The ", "Vinny's ", "After ", "Jonny's ", "Silver ", "Italian ", "Taco ", "Burger ", "Kentucky Fried "};
+    private static String[] nameSuffixes = {"Ronalds", "Donalds", "Wendys", "Pizza", "Saves", "Bell", "Trump", "Way", "Lad", "Prince"};
+    
+    private static String[] foodTypes = {"Fast-food", "Italian", "Health", "Vegan", "Vegetarian", "Thai", "Chinese", "Mexican", "French", "Fancy", "Not-fancy"};
+    
+    private static String[] locations = {"234 Something Street", "123 Food Avenue", "555 Eats Lane", "87 Main Lane"};
+    
+    private static String[] openingHours = {"5am", "6am", "11am", "12pm", "8am", "6:30am"};
+    private static String[] closingHours = { "11pm", "10pm", "11:30pm", "12am", "11:59pm", "1am", "2am"};
+    
     //Code that originally filled the database with fake contacts
-    /*
-    public static ContactService createDemoService() {
+    public static RestaurantService createDemoService() {
         if (instance == null) {
 
-            final ContactService contactService = new ContactService();
+            final RestaurantService restaurantService = new RestaurantService();
 
             Random r = new Random(0);
-            Calendar cal = Calendar.getInstance();
-            for (int i = 0; i < 100; i++) {
-                Contact contact = new Contact();
-                contact.setFirstName(fnames[r.nextInt(fnames.length)]);
-                contact.setLastName(lnames[r.nextInt(fnames.length)]);
-                contact.setStartDate(cal.getTime());
-                contact.setTask("+ 358 555 " + (100 + r.nextInt(900)));
-                cal.set(1930 + r.nextInt(70),
-                        r.nextInt(11), r.nextInt(28));
-                contact.setEndDate(cal.getTime());
-                contactService.save(contact);
+            
+            for (int i = 0; i < 10; i++) {
+                Restaurant restaurant = new Restaurant();
+                restaurant.setRestaurantName(namePrefixes[r.nextInt(namePrefixes.length)] + nameSuffixes[r.nextInt(nameSuffixes.length)]);
+                restaurant.setFoodType(foodTypes[r.nextInt(foodTypes.length)]);
+                restaurant.setLocation(locations[r.nextInt(locations.length)]);
+                restaurant.setHoursOfBusiness(openingHours[r.nextInt(openingHours.length)] + " to " + closingHours[r.nextInt(closingHours.length)]);
+
+                restaurantService.save(restaurant);
             }
-            instance = contactService;
+            instance = restaurantService;
         }
 
         return instance;
     }
-	*/
+	
 
     private HashMap<Long, Restaurant> restaurants = new HashMap<>();
     private long nextId = 0;

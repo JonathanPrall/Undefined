@@ -12,32 +12,33 @@ public class UserService {
 
     private static UserService instance;
 
+    
+    private static String[] firstNames = {"Bob", "Joe", "Vinny ", "Ana", "Sussy", "Chuck", "Fred", "Hannah", "Sam", "Donald"};
+    private static String[] lastNames = {"Ronald", "Donald", "Hines", "Lange", "McGuffin", "Bell", "Trump", "Bilbo", "Proll", "Prince"};
+    
+    private static String[] emails = {"Fast-foodguy", "Italian883", "Bob67777", "VeganLad", "VegetarianBruv", "outofideas", "personname", "anonymous", "unprofessionalemail", "coolkid1234", "Not-fancy-shmancy"};
+    
     //Code that originally filled the database with fake contacts
-    /*
-    public static ContactService createDemoService() {
+    public static UserService createDemoService() {
         if (instance == null) {
 
-            final ContactService contactService = new ContactService();
+            final UserService userService = new UserService();
 
             Random r = new Random(0);
-            Calendar cal = Calendar.getInstance();
-            for (int i = 0; i < 100; i++) {
-                Contact contact = new Contact();
-                contact.setFirstName(fnames[r.nextInt(fnames.length)]);
-                contact.setLastName(lnames[r.nextInt(fnames.length)]);
-                contact.setStartDate(cal.getTime());
-                contact.setTask("+ 358 555 " + (100 + r.nextInt(900)));
-                cal.set(1930 + r.nextInt(70),
-                        r.nextInt(11), r.nextInt(28));
-                contact.setEndDate(cal.getTime());
-                contactService.save(contact);
+            for (int i = 0; i < 10; i++) {
+                User user = new User();
+                user.setUserName(firstNames[r.nextInt(firstNames.length)] + " " + lastNames[r.nextInt(lastNames.length)]);
+                user.setEmailAddress(emails[r.nextInt(emails.length)] + "@address.com");
+                user.setPhoneNumber(r.nextInt(10) + "" + r.nextInt(10) + "" + r.nextInt(10) + "" + r.nextInt(10) + "" + r.nextInt(10) + "" + r.nextInt(10));
+                
+                userService.save(user);
             }
-            instance = contactService;
+            instance = userService;
         }
 
         return instance;
     }
-	*/
+	
 
     private HashMap<Long, User> users = new HashMap<>();
     private long nextId = 0;

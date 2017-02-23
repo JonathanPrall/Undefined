@@ -8,6 +8,10 @@ public class MenuItem
 	private float price = Float.POSITIVE_INFINITY;
 	//private picture
 	
+	public MenuItem(){
+		
+	}
+	
 	//Creates the menu item with all information
 	public MenuItem(String name, String description, float price){
 		this.name = name;
@@ -40,6 +44,10 @@ public class MenuItem
 	
 	public void setPrice(float price){
 		this.price = price;
+	}
+	
+	public String toString(){
+		return name + "\n" + description + "\n" + price;
 	}
 	
 }

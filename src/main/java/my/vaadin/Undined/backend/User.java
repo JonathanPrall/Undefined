@@ -39,15 +39,13 @@ public class User implements Serializable, Cloneable {
     	return emailAddress;
     }
     
-    public boolean setEmailAddress(String emailAddress){
+    public void setEmailAddress(String emailAddress){
     	//If the email address has made an attempt to look valid
     	if(emailAddress.contains("@") && emailAddress.contains(".")){
     		//Set email address, return true
     		this.emailAddress = emailAddress;
-    		return true;
     	}else{
     		//Otherwise, reject this falsehood
-    		return false;
     	}
     }
 
@@ -57,7 +55,7 @@ public class User implements Serializable, Cloneable {
     	return phoneNumber;
     }
     
-    public boolean setPhoneNumber(String phoneNumber){
+    public void setPhoneNumber(String phoneNumber){
     	//Remove dashes and whitespace
     	phoneNumber = phoneNumber.replace("-", "");
     	phoneNumber = phoneNumber.replace(" ", "");
@@ -65,10 +63,6 @@ public class User implements Serializable, Cloneable {
     	//If only numbers remain, accept the phone number
     	if(phoneNumber.matches("[0-9]+")){
     		this.phoneNumber = phoneNumber;
-    		return true;
-    	}else{
-    		//Otherwise no.
-    		return false;
     	}
     }
     

@@ -14,9 +14,7 @@ public class Restaurant implements Serializable, Cloneable {
     private String restaurantName = "";
     private String foodType = "";
     private String location = "";
-    
-    //Sunday through Saturday, Sunday = 0
-    private OperatingHours[] operatingHours = new OperatingHours[7];
+    private String hoursOfBusiness = "";
     
     //Get and set ID
     public Long getId() {
@@ -57,23 +55,14 @@ public class Restaurant implements Serializable, Cloneable {
     	this.location = location;
     }
 
+
     
-    //Get and set operating hours based on day
-    public OperatingHours getOperatingHours(int day){
-    	//If day is valid
-    	if(day >= 0 && day < 7){
-    		return operatingHours[day];
-    	}else{
-    		return null;
-    	}
+    public String getHoursOfBusiness(){
+    	return hoursOfBusiness;
     }
     
-    public boolean setOperatingHours(int open, int close, int day){
-    	if(day >= 0 && day < 7){
-    		return operatingHours[day].setOperatingHours(open, close);
-    	}else{
-    		return false;
-    	}
+    public void setHoursOfBusiness(String hoursOfBusiness){
+    	this.hoursOfBusiness = hoursOfBusiness;
     }
     
     @Override

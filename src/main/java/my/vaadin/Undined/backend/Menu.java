@@ -12,7 +12,7 @@ public class Menu implements Serializable, Cloneable {
     private Long id;
 
     private String menuName = "";
-    private ArrayList<MenuItem> menu; 
+    private ArrayList<MenuItem> menu = new ArrayList<MenuItem>(); 
 
     //Get and set ID
     public Long getId() {

@@ -12,32 +12,43 @@ public class MenuService {
 
     private static MenuService instance;
 
-    //Code that originally filled the database with fake contacts
-    /*
-    public static ContactService createDemoService() {
+    
+    private static String[] namePrefixes = {"Mc", "The ", "Vinny's ", "After ", "Jonny's ", "Silver ", "Italian ", "Taco ", "Burger ", "Kentucky Fried "};
+    private static String[] nameSuffixes = {"Ronalds", "Donalds", "Wendys", "Pizza", "Saves", "Bell", "Trump", "Way", "Lad", "Prince"};
+    
+    private static String[] itemNames = {"burger", "fries", "steak", "poutine", "chickenstuff", "pop", "water"};
+    private static String[] itemDescriptions = {"tastes good", "tastes ok", "the best food ever made", "thirst quenching", "spicy"};
+    
+    //Code that originally filled the database with fake contacts 
+    public static MenuService createDemoService() {
         if (instance == null) {
 
-            final ContactService contactService = new ContactService();
+            final MenuService menuService = new MenuService();
 
             Random r = new Random(0);
             Calendar cal = Calendar.getInstance();
-            for (int i = 0; i < 100; i++) {
-                Contact contact = new Contact();
-                contact.setFirstName(fnames[r.nextInt(fnames.length)]);
-                contact.setLastName(lnames[r.nextInt(fnames.length)]);
-                contact.setStartDate(cal.getTime());
-                contact.setTask("+ 358 555 " + (100 + r.nextInt(900)));
-                cal.set(1930 + r.nextInt(70),
-                        r.nextInt(11), r.nextInt(28));
-                contact.setEndDate(cal.getTime());
-                contactService.save(contact);
+            for (int i = 0; i < 10; i++) {
+                Menu menu = new Menu();
+                menu.setMenuName(namePrefixes[r.nextInt(namePrefixes.length)] + nameSuffixes[r.nextInt(nameSuffixes.length)]);
+
+                //Add 5 items to menu
+                for(int item = 0; item < 5; item++){
+                	MenuItem menuItem = new MenuItem();
+                	
+                	menuItem.setName(itemNames[r.nextInt(itemNames.length)]);
+                	menuItem.setDescription(itemDescriptions[r.nextInt(itemDescriptions.length)]);
+                	menuItem.setPrice(r.nextFloat() * 50);
+                	menu.addMenuItem(menuItem);
+                }
+                
+                menuService.save(menu);
             }
-            instance = contactService;
+            instance = menuService;
         }
 
         return instance;
     }
-	*/
+	
 
     private HashMap<Long, Menu> menus = new HashMap<>();
     private long nextId = 0;
