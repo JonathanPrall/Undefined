@@ -15,34 +15,46 @@ import java.util.logging.Logger;
 // class and nothing Vaadin specific.
 public class RestaurantService {
 
+	//Create fake data
+	static String[] restaurantName = {
+			"Bione", "Song's Korean Restaurant", "Wasabi House",
+			"Thai Ivory Cuisine", "Blue Olive Greek", "McDonald's"  
+	};
+	static String[] foodType = {
+			"Asia Cuisine", "Europe Cuisine", "Fast food"
+	};
+	static String[] location = {
+			"6300 Quinpool Rd",
+			"6249 Quinpool Rd",
+			"6403 Quinpool Rd",
+			"6324 Quinpool Rd",
+			"6196 Quinpool Rd",
+			"6303 Quinpool Rd"
+	};
+	
+	
+	
     private static RestaurantService instance;
 
-    //Code that originally filled the database with fake contacts
-    /*
-    public static ContactService createDemoService() {
-        if (instance == null) {
-
-            final ContactService contactService = new ContactService();
-
-            Random r = new Random(0);
-            Calendar cal = Calendar.getInstance();
-            for (int i = 0; i < 100; i++) {
-                Contact contact = new Contact();
-                contact.setFirstName(fnames[r.nextInt(fnames.length)]);
-                contact.setLastName(lnames[r.nextInt(fnames.length)]);
-                contact.setStartDate(cal.getTime());
-                contact.setTask("+ 358 555 " + (100 + r.nextInt(900)));
-                cal.set(1930 + r.nextInt(70),
-                        r.nextInt(11), r.nextInt(28));
-                contact.setEndDate(cal.getTime());
-                contactService.save(contact);
-            }
-            instance = contactService;
-        }
-
-        return instance;
+    public static RestaurantService createService() {
+    	if(instance == null) {
+    		
+    		final RestaurantService restaurantService = new RestaurantService();
+    		for (int i = 0; i < 6; i++) {
+    			Restaurant restaurant = new Restaurant();
+    			restaurant.setRestaurantName(restaurantName[i]);
+    			if (i < 4) {
+    				restaurant.setFoodType(foodType[0]);
+    			} else {
+    				restaurant.setFoodType(foodType[i-3]);
+    			}
+    			restaurant.setLocation(location[i]);
+    			restaurantService.save(restaurant);
+    		}
+    		instance = restaurantService;
+    	}
+    	return instance;
     }
-	*/
 
     private HashMap<Long, Restaurant> restaurants = new HashMap<>();
     private long nextId = 0;
@@ -93,7 +105,7 @@ public class RestaurantService {
     }
 
     public synchronized void save(Restaurant entry) {
-        if (entry.getId() == null) {
+        if (entry.getId() == 0) {
             entry.setId(nextId++);
         }
         try {

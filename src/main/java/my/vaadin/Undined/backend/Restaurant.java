@@ -9,7 +9,7 @@ import java.io.Serializable;
 //											Lets play spot the ctrl+f replace
 public class Restaurant implements Serializable, Cloneable {
 
-    private Long id;
+    private long id;
 
     private String restaurantName = "";
     private String foodType = "";
@@ -19,16 +19,19 @@ public class Restaurant implements Serializable, Cloneable {
     private OperatingHours[] operatingHours = new OperatingHours[7];
     
     //Get and set ID
-    public Long getId() {
-        return id;
-    }
+    
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
     
-    //Get and set restaurant name
+    public long getId() {
+		return id;
+	}
+
+
+	//Get and set restaurant name
     public void setRestaurantName(String restaurantName) {
         this.restaurantName = restaurantName;
     }
