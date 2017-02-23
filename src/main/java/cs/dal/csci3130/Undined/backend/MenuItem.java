@@ -1,4 +1,4 @@
-package my.vaadin.Undined.backend;
+package cs.dal.csci3130.Undined.backend;
 
 //Class for storing information for an item on a restaurant's menu
 public class MenuItem

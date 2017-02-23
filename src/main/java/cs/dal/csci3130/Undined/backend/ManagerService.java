@@ -1,4 +1,4 @@
-package my.vaadin.Undined.backend;
+package cs.dal.csci3130.Undined.backend;
 
 import org.apache.commons.beanutils.BeanUtils;
 
@@ -8,9 +8,9 @@ import java.util.logging.Logger;
 
 // Backend service class. This is just a typical Java backend implementation
 // class and nothing Vaadin specific.
-public class UserService {
+public class ManagerService {
 
-    private static UserService instance;
+    private static ManagerService instance;
 
     //Code that originally filled the database with fake contacts
     /*
@@ -39,38 +39,38 @@ public class UserService {
     }
 	*/
 
-    private HashMap<Long, User> users = new HashMap<>();
+    private HashMap<Long, Manager> managers = new HashMap<>();
     private long nextId = 0;
 
-    //I think this is the search box.
-    public synchronized List<User> findAll(String stringFilter) {
-        ArrayList<User> arrayList = new ArrayList<User>();
+    //I think this is the search box
+    public synchronized List<Manager> findAll(String stringFilter) {
+        ArrayList<Manager> arrayList = new ArrayList<Manager>();
         
-        //For each user
-        for (User user : users.values()) {
+        //For each manager
+        for (Manager manager : managers.values()) {
             try {
             	//If there is nothing in the search box
             	//or
-            	//The User.toString() contains the text in the search box (not case sensitive)
+            	//The Manager.toString() contains the text in the search box (not case sensitive)
                 boolean passesFilter = (stringFilter == null || stringFilter.isEmpty())
-                        || user.toString().toLowerCase()
+                        || manager.toString().toLowerCase()
                                 .contains(stringFilter.toLowerCase());
                 //Add it to the list that will be returned
                 if (passesFilter) {
-                    arrayList.add(user.clone());
+                    arrayList.add(manager.clone());
                 }
             
             //If error, log it
             } catch (CloneNotSupportedException ex) {
-                Logger.getLogger(UserService.class.getName()).log(
+                Logger.getLogger(ManagerService.class.getName()).log(
                         Level.SEVERE, null, ex);
             }
         }
         
         //Sort the created list
-        Collections.sort(arrayList, new Comparator<User>() {
+        Collections.sort(arrayList, new Comparator<Manager>() {
             @Override
-            public int compare(User o1, User o2) {
+            public int compare(Manager o1, Manager o2) {
                 return (int) (o2.getId() - o1.getId());
             }
         });
@@ -80,23 +80,23 @@ public class UserService {
     }
 
     public synchronized long count() {
-        return users.size();
+        return managers.size();
     }
 
-    public synchronized void delete(User value) {
-        users.remove(value.getId());
+    public synchronized void delete(Manager value) {
+        managers.remove(value.getId());
     }
 
-    public synchronized void save(User entry) {
+    public synchronized void save(Manager entry) {
         if (entry.getId() == null) {
             entry.setId(nextId++);
         }
         try {
-            entry = (User) BeanUtils.cloneBean(entry);
+            entry = (Manager) BeanUtils.cloneBean(entry);
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
-        users.put(entry.getId(), entry);
+        managers.put(entry.getId(), entry);
     }
 
 }

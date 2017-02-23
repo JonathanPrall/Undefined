@@ -1,4 +1,4 @@
-package my.vaadin.Undined;
+package cs.dal.csci3130.Undined;
 
 import javax.servlet.annotation.WebServlet;
 
@@ -16,9 +16,8 @@ import com.vaadin.v7.data.util.BeanItemContainer;
 import com.vaadin.v7.ui.Grid;
 import com.vaadin.v7.ui.TextField;
 
-
-import my.vaadin.Undined.backend.Restaurant;
-import my.vaadin.Undined.backend.RestaurantService;
+import cs.dal.csci3130.Undined.backend.Restaurant;
+import cs.dal.csci3130.Undined.backend.RestaurantService;
 
 /**
  * This UI is the application entry point. A UI may either represent a browser window 

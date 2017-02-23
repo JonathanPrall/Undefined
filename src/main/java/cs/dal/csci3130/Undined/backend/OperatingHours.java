@@ -1,4 +1,4 @@
-package my.vaadin.Undined.backend;
+package cs.dal.csci3130.Undined.backend;
 
 //Data type to hold open and close times in 24 hour format
 /*

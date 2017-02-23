@@ -1,4 +1,4 @@
-package my.vaadin.Undined.backend;
+package cs.dal.csci3130.Undined.backend;
 
 import org.apache.commons.beanutils.BeanUtils;
 

@@ -1,4 +1,4 @@
-package my.vaadin.Undined.backend;
+package cs.dal.csci3130.Undined.backend;
 
 import org.apache.commons.beanutils.BeanUtils;
 
@@ -8,9 +8,9 @@ import java.util.logging.Logger;
 
 // Backend service class. This is just a typical Java backend implementation
 // class and nothing Vaadin specific.
-public class ManagerService {
+public class MenuService {
 
-    private static ManagerService instance;
+    private static MenuService instance;
 
     //Code that originally filled the database with fake contacts
     /*
@@ -39,38 +39,38 @@ public class ManagerService {
     }
 	*/
 
-    private HashMap<Long, Manager> managers = new HashMap<>();
+    private HashMap<Long, Menu> menus = new HashMap<>();
     private long nextId = 0;
 
-    //I think this is the search box
-    public synchronized List<Manager> findAll(String stringFilter) {
-        ArrayList<Manager> arrayList = new ArrayList<Manager>();
+    //I think this is the search box.
+    public synchronized List<Menu> findAll(String stringFilter) {
+        ArrayList<Menu> arrayList = new ArrayList<Menu>();
         
-        //For each manager
-        for (Manager manager : managers.values()) {
+        //For each menu
+        for (Menu menu : menus.values()) {
             try {
             	//If there is nothing in the search box
             	//or
-            	//The Manager.toString() contains the text in the search box (not case sensitive)
+            	//The Menu.toString() contains the text in the search box (not case sensitive)
                 boolean passesFilter = (stringFilter == null || stringFilter.isEmpty())
-                        || manager.toString().toLowerCase()
+                        || menu.toString().toLowerCase()
                                 .contains(stringFilter.toLowerCase());
                 //Add it to the list that will be returned
                 if (passesFilter) {
-                    arrayList.add(manager.clone());
+                    arrayList.add(menu.clone());
                 }
             
             //If error, log it
             } catch (CloneNotSupportedException ex) {
-                Logger.getLogger(ManagerService.class.getName()).log(
+                Logger.getLogger(MenuService.class.getName()).log(
                         Level.SEVERE, null, ex);
             }
         }
         
         //Sort the created list
-        Collections.sort(arrayList, new Comparator<Manager>() {
+        Collections.sort(arrayList, new Comparator<Menu>() {
             @Override
-            public int compare(Manager o1, Manager o2) {
+            public int compare(Menu o1, Menu o2) {
                 return (int) (o2.getId() - o1.getId());
             }
         });
@@ -80,23 +80,23 @@ public class ManagerService {
     }
 
     public synchronized long count() {
-        return managers.size();
+        return menus.size();
     }
 
-    public synchronized void delete(Manager value) {
-        managers.remove(value.getId());
+    public synchronized void delete(Menu value) {
+        menus.remove(value.getId());
     }
 
-    public synchronized void save(Manager entry) {
+    public synchronized void save(Menu entry) {
         if (entry.getId() == null) {
             entry.setId(nextId++);
         }
         try {
-            entry = (Manager) BeanUtils.cloneBean(entry);
+            entry = (Menu) BeanUtils.cloneBean(entry);
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
-        managers.put(entry.getId(), entry);
+        menus.put(entry.getId(), entry);
     }
 
 }
