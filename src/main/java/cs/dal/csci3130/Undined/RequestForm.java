@@ -24,6 +24,7 @@ public class RequestForm extends FormLayout{
 	TextField restaurantName = new TextField("Restaurant");
 	TextField foodType = new TextField("Food Type");
 	TextField location = new TextField("Location");
+	TextField hoursOfBusiness = new TextField("Working hours");
 	// should be a operating hours here
 	
 	Restaurant restaurant;
@@ -48,7 +49,7 @@ public class RequestForm extends FormLayout{
 		HorizontalLayout actions = new HorizontalLayout(accept, reject);
 		actions.setSpacing(true);
 		
-		addComponents(actions, id, restaurantName, foodType, location);
+		addComponents(actions, id, restaurantName, foodType, location, hoursOfBusiness);
 		
 	}
 	
@@ -93,7 +94,5 @@ public class RequestForm extends FormLayout{
 	public AdminUI getUI() {
 		return (AdminUI) super.getUI();
 	}
-	
-	
 	
 }

@@ -16,22 +16,15 @@ import java.util.logging.Logger;
 public class RestaurantService {
 
 	//Create fake data
-	static String[] restaurantName = {
-			"Bione", "Song's Korean Restaurant", "Wasabi House",
-			"Thai Ivory Cuisine", "Blue Olive Greek", "McDonald's"  
-	};
-	static String[] foodType = {
-			"Asia Cuisine", "Europe Cuisine", "Fast food"
-	};
-	static String[] location = {
-			"6300 Quinpool Rd",
-			"6249 Quinpool Rd",
-			"6403 Quinpool Rd",
-			"6324 Quinpool Rd",
-			"6196 Quinpool Rd",
-			"6303 Quinpool Rd"
-	};
-	
+	static String[] namePrefixes = {"Mc", "The ", "Vinny's ", "After ", "Jonny's ", "Silver ", "Italian ", "Taco ", "Burger ", "Kentucky Fried "};
+    static String[] nameSuffixes = {"Ronalds", "Donalds", "Wendys", "Pizza", "Saves", "Bell", "Trump", "Way", "Lad", "Prince"};
+    
+    static String[] foodTypes = {"Fast-food", "Italian", "Health", "Vegan", "Vegetarian", "Thai", "Chinese", "Mexican", "French", "Fancy", "Not-fancy"};
+    
+    static String[] locations = {"234 Something Street", "123 Food Avenue", "555 Eats Lane", "87 Main Lane"};
+    
+    static String[] openingHours = {"5am", "6am", "11am", "12pm", "8am", "6:30am"};
+    static String[] closingHours = { "11pm", "10pm", "11:30pm", "12am", "11:59pm", "1am", "2am"};
 	
 	
     private static RestaurantService instance;
@@ -40,15 +33,18 @@ public class RestaurantService {
     	if(instance == null) {
     		
     		final RestaurantService restaurantService = new RestaurantService();
-    		for (int i = 0; i < 6; i++) {
+    		
+    		Random r = new Random(0);
+    		
+    		for (int i = 0; i < 10; i++) {
+    			
     			Restaurant restaurant = new Restaurant();
-    			restaurant.setRestaurantName(restaurantName[i]);
-    			if (i < 4) {
-    				restaurant.setFoodType(foodType[0]);
-    			} else {
-    				restaurant.setFoodType(foodType[i-3]);
-    			}
-    			restaurant.setLocation(location[i]);
+    			
+    			restaurant.setRestaurantName(namePrefixes[r.nextInt(namePrefixes.length)] + nameSuffixes[r.nextInt(nameSuffixes.length)]);
+    			restaurant.setFoodType(foodTypes[r.nextInt(foodTypes.length)]);
+    			restaurant.setLocation(locations[r.nextInt(locations.length)]);
+    			restaurant.setHoursOfBusiness(openingHours[r.nextInt(openingHours.length)] + " to " + closingHours[r.nextInt(closingHours.length)]);
+	
     			restaurantService.save(restaurant);
     		}
     		instance = restaurantService;
