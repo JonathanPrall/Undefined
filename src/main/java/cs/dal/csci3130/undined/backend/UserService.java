@@ -1,4 +1,4 @@
-package dal.cs.csci3130.undined.backend;
+package cs.dal.csci3130.undined.backend;
 
 import org.apache.commons.beanutils.BeanUtils;
 
@@ -6,16 +6,11 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/** Separate Java service class.
- * Backend implementation for the address book application, with "detached entities"
- * simulating real world DAO. Typically these something that the Java EE
- * or Spring backend services provide
- */
 // Backend service class. This is just a typical Java backend implementation
 // class and nothing Vaadin specific.
-public class RestaurantService {
+public class UserService {
 
-    private static RestaurantService instance;
+    private static UserService instance;
 
     //Code that originally filled the database with fake contacts
     /*
@@ -44,38 +39,38 @@ public class RestaurantService {
     }
 	*/
 
-    private HashMap<Long, Restaurant> restaurants = new HashMap<>();
+    private HashMap<Long, User> users = new HashMap<>();
     private long nextId = 0;
 
-    //I think this is the search box
-    public synchronized List<Restaurant> findAll(String stringFilter) {
-        ArrayList<Restaurant> arrayList = new ArrayList<Restaurant>();
+    //I think this is the search box.
+    public synchronized List<User> findAll(String stringFilter) {
+        ArrayList<User> arrayList = new ArrayList<User>();
         
-        //For each restaurant
-        for (Restaurant restaurant : restaurants.values()) {
+        //For each user
+        for (User user : users.values()) {
             try {
             	//If there is nothing in the search box
             	//or
-            	//The Restaurant.toString() contains the text in the search box (not case sensitive)
+            	//The User.toString() contains the text in the search box (not case sensitive)
                 boolean passesFilter = (stringFilter == null || stringFilter.isEmpty())
-                        || restaurant.toString().toLowerCase()
+                        || user.toString().toLowerCase()
                                 .contains(stringFilter.toLowerCase());
                 //Add it to the list that will be returned
                 if (passesFilter) {
-                    arrayList.add(restaurant.clone());
+                    arrayList.add(user.clone());
                 }
             
             //If error, log it
             } catch (CloneNotSupportedException ex) {
-                Logger.getLogger(RestaurantService.class.getName()).log(
+                Logger.getLogger(UserService.class.getName()).log(
                         Level.SEVERE, null, ex);
             }
         }
         
         //Sort the created list
-        Collections.sort(arrayList, new Comparator<Restaurant>() {
+        Collections.sort(arrayList, new Comparator<User>() {
             @Override
-            public int compare(Restaurant o1, Restaurant o2) {
+            public int compare(User o1, User o2) {
                 return (int) (o2.getId() - o1.getId());
             }
         });
@@ -85,23 +80,23 @@ public class RestaurantService {
     }
 
     public synchronized long count() {
-        return restaurants.size();
+        return users.size();
     }
 
-    public synchronized void delete(Restaurant value) {
-        restaurants.remove(value.getId());
+    public synchronized void delete(User value) {
+        users.remove(value.getId());
     }
 
-    public synchronized void save(Restaurant entry) {
+    public synchronized void save(User entry) {
         if (entry.getId() == null) {
             entry.setId(nextId++);
         }
         try {
-            entry = (Restaurant) BeanUtils.cloneBean(entry);
+            entry = (User) BeanUtils.cloneBean(entry);
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
-        restaurants.put(entry.getId(), entry);
+        users.put(entry.getId(), entry);
     }
 
 }

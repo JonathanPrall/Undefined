@@ -3,8 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>my.vaadin</groupId>
-	<artifactId>Undined</artifactId>
+	<artifactId>undined</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Undined</name>
@@ -192,4 +191,5 @@
 		</profile>
 	</profiles>
 
+	<groupId>cs.dal.csci3130.undined</groupId>
 </project>
