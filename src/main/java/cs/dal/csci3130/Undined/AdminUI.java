@@ -10,10 +10,13 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.themes.ValoTheme;
 import com.vaadin.v7.data.util.BeanItemContainer;
 import com.vaadin.v7.ui.Grid;
+import com.vaadin.v7.ui.Label;
 import com.vaadin.v7.ui.TextField;
 
 import cs.dal.csci3130.Undined.backend.Restaurant;
@@ -36,6 +39,8 @@ public class AdminUI extends UI {
 
 	TextField filter = new TextField();
 	Grid requestList = new Grid();
+	Grid acceptedList = new Grid();
+	Grid rejectedList = new Grid();
 	Button edit = new Button("Edit");
 	
 	RequestForm requestForm = new RequestForm();
@@ -56,28 +61,59 @@ public class AdminUI extends UI {
 		edit.addClickListener(e -> requestForm.edit(new Restaurant()));
 		
 		filter.setInputPrompt("Filter Requests");
-		filter.addTextChangeListener(e -> refreshRequests(e.getText()));
+		filter.addTextChangeListener(e -> refreshAll(e.getText()));
 		
 		requestList.setContainerDataSource(new BeanItemContainer<>(Restaurant.class));
-		requestList.setColumnOrder("id", "restaurantName","location");
-		requestList.removeColumn("foodType");
+		requestList.setColumnOrder("id", "restaurantName","foodType","location","hoursOfBusiness");
+		requestList.removeColumn("status");
 		requestList.setSelectionMode(Grid.SelectionMode.SINGLE);
 		requestList.addSelectionListener(
 				e -> requestForm.edit((Restaurant) requestList.getSelectedRow()));
-		refreshRequests();
+		refreshAll();
+		
+		acceptedList.setContainerDataSource(new BeanItemContainer<>(Restaurant.class));
+		acceptedList.setColumnOrder("id", "restaurantName","foodType","location","hoursOfBusiness");
+		acceptedList.removeColumn("status");
+		acceptedList.setSelectionMode(Grid.SelectionMode.SINGLE);
+		acceptedList.addSelectionListener(
+				e -> requestForm.edit((Restaurant) acceptedList.getSelectedRow()));
+		refreshAll();
+		
+		rejectedList.setContainerDataSource(new BeanItemContainer<>(Restaurant.class));
+		rejectedList.setColumnOrder("id", "restaurantName","foodType","location","hoursOfBusiness");
+		rejectedList.removeColumn("status");
+		rejectedList.setSelectionMode(Grid.SelectionMode.SINGLE);
+		rejectedList.addSelectionListener(
+				e -> requestForm.edit((Restaurant) rejectedList.getSelectedRow()));
+		refreshAll();
 	}
     
 
 	private void buildLayout() {
+		
 		HorizontalLayout actions = new HorizontalLayout(filter, edit);
 		actions.setWidth("100%");
 		filter.setWidth("100%");
 		actions.setExpandRatio(filter, 1);
 		
-		VerticalLayout left = new VerticalLayout(actions, requestList);
+		TabSheet lists = new TabSheet();
+		lists.setHeight(100.0f, Unit.PERCENTAGE);
+		lists.addStyleName(ValoTheme.TABSHEET_FRAMED);
+		lists.addStyleName(ValoTheme.TABSHEET_PADDED_TABBAR);
+
+		VerticalLayout tab1 = generateTab(requestList);
+		VerticalLayout tab2 = generateTab(acceptedList);
+		VerticalLayout tab3 = generateTab(rejectedList);
+		
+		lists.addTab(tab1, "Requests");
+		lists.addTab(tab2, "Accepts");
+		lists.addTab(tab3, "Rejects");
+		
+		
+		VerticalLayout left = new VerticalLayout(actions, lists);
 		left.setSizeFull();
-		requestList.setSizeFull();
-		left.setExpandRatio(requestList, 1);
+		lists.setSizeFull();
+		left.setExpandRatio(lists, 1);
 		
 		HorizontalLayout mainLayout = new HorizontalLayout(left, requestForm);
 		mainLayout.setSizeFull();
@@ -86,15 +122,30 @@ public class AdminUI extends UI {
 		setContent(mainLayout);
 	}
 
-	void refreshRequests() {
-		refreshRequests(filter.getValue());
+	void refreshAll() {
+		refreshAll(filter.getValue());
 	}
 	
-	private void refreshRequests(String stringFilter) {
+	private void refreshAll(String stringFilter) {
 		requestList.setContainerDataSource(new BeanItemContainer<>(
-				Restaurant.class, service.findAll(stringFilter)));
+				Restaurant.class, service.findAll(stringFilter, 0)));
+		acceptedList.setContainerDataSource(new BeanItemContainer<>(
+				Restaurant.class, service.findAll(stringFilter, 1)));
+		rejectedList.setContainerDataSource(new BeanItemContainer<>(
+				Restaurant.class, service.findAll(stringFilter, -1)));
 		requestForm.setVisible(false);
 		
+	}
+	
+	private VerticalLayout generateTab(Grid t) {
+		final Label label = new Label();
+		label.setWidth(100.0f, Unit.PERCENTAGE);
+		
+		t.setSizeFull();
+		final VerticalLayout layout = new VerticalLayout(label);
+		layout.setMargin(true);
+		layout.addComponent(t);
+		return layout;
 	}
 
 	@WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)

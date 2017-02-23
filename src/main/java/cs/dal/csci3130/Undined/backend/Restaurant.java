@@ -16,7 +16,18 @@ public class Restaurant implements Serializable, Cloneable {
     private String location = "";
     private String hoursOfBusiness = "";
     
+    private int status;
    
+    // Get and set status
+	public int getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
 
 	//Get and set ID
     public void setId(long id) {

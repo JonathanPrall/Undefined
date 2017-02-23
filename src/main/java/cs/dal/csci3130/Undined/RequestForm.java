@@ -57,11 +57,11 @@ public class RequestForm extends FormLayout{
 		// Commit the fields from UI to DAO
 		try {
 			formFieldBindings.commit();
+			restaurant.setStatus(1);
 			getUI().service.save(restaurant);
-			
 			String msg = String.format("Accepted '%s'", restaurant.getRestaurantName());
 			Notification.show(msg, Type.TRAY_NOTIFICATION);
-			getUI().refreshRequests();
+			getUI().refreshAll();
 		} catch (CommitException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -71,11 +71,11 @@ public class RequestForm extends FormLayout{
 	public void reject(Button.ClickEvent event) {
 		try {
 			formFieldBindings.commit();
+			restaurant.setStatus(-1);
 			getUI().service.delete(restaurant);
-			
 			String msg = String.format("Rejected '%s'", restaurant.getRestaurantName());
 			Notification.show(msg, Type.TRAY_NOTIFICATION);
-			getUI().refreshRequests();
+			getUI().refreshAll();
 		} catch (CommitException e) {
 			e.printStackTrace();
 		}
