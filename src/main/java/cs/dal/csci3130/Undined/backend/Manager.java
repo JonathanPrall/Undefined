@@ -19,6 +19,13 @@ public class Manager implements Serializable, Cloneable {
     private String managerName = "";
     private Long restaurantId;
 
+    public Manager(){}
+    public Manager(long i, String managerName, long j){
+    	this.id = i;
+    	this.managerName = managerName;
+    	this.restaurantId = j;
+    }
+    
     //Get and set ID
     public Long getId() {
         return id;

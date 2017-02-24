@@ -14,6 +14,13 @@ public class Menu implements Serializable, Cloneable {
     private String menuName = "";
     private ArrayList<MenuItem> menu; 
 
+    public Menu(){}
+    public Menu(Long id, String menuName,ArrayList<MenuItem> menu){
+    	this.id = id;
+    	this.menuName = menuName;
+    	this.menu = menu;
+    }
+    
     //Get and set ID
     public Long getId() {
         return id;
@@ -39,18 +46,6 @@ public class Menu implements Serializable, Cloneable {
     	return menu;
     }
     
-    //Add and remove menu items from the menu
-    public void addMenuItem(MenuItem item){
-    	menu.add(item);
-    }
-    
-    public void addMenuItem(String name, String description, float price){
-    	menu.add(new MenuItem(name, description, price));
-    }
-    
-    public void removeMenuItem(MenuItem item){
-    	menu.remove(item);
-    }
 
     @Override
     public Menu clone() throws CloneNotSupportedException {

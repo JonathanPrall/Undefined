@@ -14,6 +14,13 @@ public class User implements Serializable, Cloneable {
     private String emailAddress = "";
     private String phoneNumber = "";
 
+    public User(){}
+    public User(Long id, String userName, String emailAddress, String phoneNumber){
+    	this.id = id;
+    	this.userName = userName;
+    	this.emailAddress = emailAddress;
+    	this.phoneNumber = phoneNumber;
+    }
     //Get and set ID
     public Long getId() {
         return id;
