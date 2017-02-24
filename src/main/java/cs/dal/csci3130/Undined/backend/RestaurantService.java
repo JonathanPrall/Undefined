@@ -95,7 +95,38 @@ public class RestaurantService {
         //Return it
         return arrayList;
     }
+    
+    public synchronized List<Restaurant> findAll() {
+        ArrayList<Restaurant> arrayList = new ArrayList<Restaurant>();
+        
+        //For each restaurant
+        for (Restaurant restaurant : restaurants.values()) {
+            try {
+            	arrayList.add(restaurant.clone());
 
+            } catch (CloneNotSupportedException ex) {
+                Logger.getLogger(RestaurantService.class.getName()).log(
+                        Level.SEVERE, null, ex);
+            }
+        }
+        
+        //Sort the created list
+        Collections.sort(arrayList, new Comparator<Restaurant>() {
+            @Override
+            public int compare(Restaurant o1, Restaurant o2) {
+                return (int) (o1.getId() - o2.getId());
+            }
+        });
+        
+        //Return it
+        return arrayList;
+    }
+
+    public synchronized long nextID(){
+		return nextId++;
+    	
+    }
+    
     public synchronized long count() {
         return restaurants.size();
     }
