@@ -24,7 +24,7 @@ import cs.dal.csci3130.Undined.backend.Restaurant;
 import cs.dal.csci3130.Undined.backend.RestaurantService;
 
 /**
- * @author tony
+ * @author tony 
  *
  */
 @Title("Restaurant Register page")

@@ -28,7 +28,7 @@ public class Restaurant implements Serializable, Cloneable {
     	this.setLocation(location);
     	this.setHoursOfBusiness(hoursOfBusiness);
     }
-    // Get and set status
+    // Get and set status 
 	public int getStatus() {
 		return status;
 	}
