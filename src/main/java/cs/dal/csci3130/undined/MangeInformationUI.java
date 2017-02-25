@@ -27,7 +27,7 @@ public class MangeInformationUI
 	TextField email = new TextField("Email");
 	TextField phone = new TextField("Phone");
 	TextField des = new TextField("Description");
-	TextField available = new TextField("# of tables are available");
+	TextField available = new TextField("# of tables available");
 	ManageInfo mi;
 	
 	BeanFieldGroup<ManageInfo> formFieldBindings;
@@ -81,7 +81,4 @@ public class MangeInformationUI
     public RestaurantUI getUI() {
         return (RestaurantUI) super.getUI();
     }
-
-}
-
 }
