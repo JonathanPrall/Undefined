@@ -1,4 +1,4 @@
-package cs.dal.csci3130.Undined;
+package cs.dal.csci3130.undined;
 
 import javax.servlet.annotation.WebServlet;
 
