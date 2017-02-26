@@ -19,8 +19,8 @@ import com.vaadin.v7.ui.Grid;
 import com.vaadin.v7.ui.Label;
 import com.vaadin.v7.ui.TextField;
 
-import cs.dal.csci3130.Undined.backend.Restaurant;
-import cs.dal.csci3130.Undined.backend.RestaurantService;
+import cs.dal.csci3130.undined.backend.Restaurant;
+import cs.dal.csci3130.undined.backend.RestaurantService;
 
 
 
