@@ -1,4 +1,4 @@
-package cs.dal.csci3130.Undined.backend;
+package cs.dal.csci3130.undined.backend;
 
 //Class for storing information for an item on a restaurant's menu
 public class MenuItem
