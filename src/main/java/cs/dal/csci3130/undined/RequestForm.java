@@ -1,4 +1,4 @@
-package cs.dal.csci3130.Undined;
+package cs.dal.csci3130.undined;
 
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.ui.Button;
@@ -13,7 +13,7 @@ import com.vaadin.v7.data.fieldgroup.FieldGroup.CommitException;
 import com.vaadin.v7.ui.DateField;
 import com.vaadin.v7.ui.TextField;
 
-import cs.dal.csci3130.Undined.backend.Restaurant;
+import cs.dal.csci3130.undined.backend.Restaurant;
 
 public class RequestForm extends FormLayout{
 	
