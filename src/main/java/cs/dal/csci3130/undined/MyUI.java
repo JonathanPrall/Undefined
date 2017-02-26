@@ -1,4 +1,4 @@
-package my.vaadin.Undined;
+package my.vaadin.undined;
 
 import javax.servlet.annotation.WebServlet;
 
