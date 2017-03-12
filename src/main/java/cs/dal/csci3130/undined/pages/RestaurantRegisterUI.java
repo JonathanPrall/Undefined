@@ -1,4 +1,4 @@
-package cs.dal.csci3130.undined;
+package cs.dal.csci3130.undined.pages;
 
 import javax.servlet.annotation.WebServlet;
 
@@ -74,7 +74,7 @@ public class RestaurantRegisterUI extends UI{
 	}
 	
 	
-	@WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
+	@WebServlet(urlPatterns = "/Register/*", name = "RegisterServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = RestaurantRegisterUI.class, productionMode = false)
     public static class MyUIServlet extends VaadinServlet {
     }

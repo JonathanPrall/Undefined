@@ -1,4 +1,4 @@
-package cs.dal.csci3130.undined;
+package cs.dal.csci3130.undined.pages;
 
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.ui.Button;

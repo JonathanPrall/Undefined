@@ -1,4 +1,4 @@
-package cs.dal.csci3130.undined;
+package cs.dal.csci3130.undined.pages;
 
 import javax.servlet.annotation.WebServlet;
 
@@ -54,7 +54,6 @@ public class AdminUI extends UI {
     protected void init(VaadinRequest vaadinRequest) {
     	configureComponents();
     	buildLayout();
-    	
     }
 
     private void configureComponents() {
@@ -148,7 +147,7 @@ public class AdminUI extends UI {
 		return layout;
 	}
 
-	@WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
+	@WebServlet(urlPatterns = "/Admin/*", name = "AdminServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = AdminUI.class, productionMode = false)
     public static class MyUIServlet extends VaadinServlet {
     }
