@@ -65,7 +65,7 @@ public final class DashboardMenu extends CustomComponent {
 		settings.addStyleName("user-menu");
 		final User user = getCurrentUser();
 		settingsItem = settings.addItem("", new ThemeResource("img/profile-pic-300px.jpg"), null);
-		updateUserName(null);
+		// updateUserName(null);
 		settingsItem.addItem("Edit Profile", new Command() {
 			@Override
 			public void menuSelected(MenuItem selectedItem) {
@@ -121,7 +121,7 @@ public final class DashboardMenu extends CustomComponent {
 	@Override
 	public void attach() {
 		super.attach();
-		updateNotificationsCount(null);
+		//updateNotificationsCount(null);
 	}
 	
 //	@Subscribe
