@@ -43,7 +43,7 @@ public class AdminUI extends UI {
 	Grid rejectedList = new Grid();
 	
 	RequestForm requestForm = new RequestForm();
-	
+	EditForm editForm = new EditForm();
 	
 	RestaurantService service = RestaurantService.createService();
 	
@@ -73,7 +73,7 @@ public class AdminUI extends UI {
 		acceptedList.removeColumn("status");
 		acceptedList.setSelectionMode(Grid.SelectionMode.SINGLE);
 		acceptedList.addSelectionListener(
-				e -> requestForm.edit((Restaurant) acceptedList.getSelectedRow()));
+				e -> editForm.edit((Restaurant) acceptedList.getSelectedRow()));
 		refreshAll();
 		
 		rejectedList.setContainerDataSource(new BeanItemContainer<>(Restaurant.class));
@@ -112,7 +112,7 @@ public class AdminUI extends UI {
 		lists.setSizeFull();
 		left.setExpandRatio(lists, 1);
 		
-		HorizontalLayout mainLayout = new HorizontalLayout(left, requestForm);
+		HorizontalLayout mainLayout = new HorizontalLayout(left, requestForm, editForm);
 		mainLayout.setSizeFull();
 		mainLayout.setExpandRatio(left, 1);
 		
@@ -131,6 +131,7 @@ public class AdminUI extends UI {
 		rejectedList.setContainerDataSource(new BeanItemContainer<>(
 				Restaurant.class, service.findAll(stringFilter, -1)));
 		requestForm.setVisible(false);
+		editForm.setVisible(false);
 		
 	}
 	
