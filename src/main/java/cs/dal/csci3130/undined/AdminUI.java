@@ -13,6 +13,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.components.grid.HeaderCell;
 import com.vaadin.ui.themes.ValoTheme;
 import com.vaadin.v7.data.util.BeanItemContainer;
 import com.vaadin.v7.ui.Grid;
@@ -41,10 +42,13 @@ public class AdminUI extends UI {
 	Grid requestList = new Grid();
 	Grid acceptedList = new Grid();
 	Grid rejectedList = new Grid();
+	
+	Button approveDeny = new Button("Approve / Deny");
 	Button edit = new Button("Edit");
+	Button approve = new Button("Approve");
 	
 	RequestForm requestForm = new RequestForm();
-	
+	EditForm editForm = new EditForm();
 	
 	RestaurantService service = RestaurantService.createService();
 	
@@ -58,11 +62,14 @@ public class AdminUI extends UI {
     }
 
     private void configureComponents() {
-		edit.addClickListener(e -> requestForm.edit(new Restaurant()));
-		
+    	approveDeny.addClickListener(e -> requestForm.edit(new Restaurant()));
+    	edit.addClickListener(e -> editForm.edit(new Restaurant()));
+		approve.addClickListener(e -> requestForm.edit(new Restaurant()));
+    	
 		filter.setInputPrompt("Filter Requests");
 		filter.addTextChangeListener(e -> refreshAll(e.getText()));
 		
+		//Requests
 		requestList.setContainerDataSource(new BeanItemContainer<>(Restaurant.class));
 		requestList.setColumnOrder("id", "restaurantName","foodType","location","hoursOfBusiness");
 		requestList.removeColumn("status");
@@ -71,14 +78,16 @@ public class AdminUI extends UI {
 				e -> requestForm.edit((Restaurant) requestList.getSelectedRow()));
 		refreshAll();
 		
+		//Accepted
 		acceptedList.setContainerDataSource(new BeanItemContainer<>(Restaurant.class));
 		acceptedList.setColumnOrder("id", "restaurantName","foodType","location","hoursOfBusiness");
 		acceptedList.removeColumn("status");
 		acceptedList.setSelectionMode(Grid.SelectionMode.SINGLE);
 		acceptedList.addSelectionListener(
-				e -> requestForm.edit((Restaurant) acceptedList.getSelectedRow()));
+				e -> editForm.edit((Restaurant) acceptedList.getSelectedRow()));
 		refreshAll();
 		
+		//Rejected
 		rejectedList.setContainerDataSource(new BeanItemContainer<>(Restaurant.class));
 		rejectedList.setColumnOrder("id", "restaurantName","foodType","location","hoursOfBusiness");
 		rejectedList.removeColumn("status");
@@ -101,9 +110,9 @@ public class AdminUI extends UI {
 		lists.addStyleName(ValoTheme.TABSHEET_FRAMED);
 		lists.addStyleName(ValoTheme.TABSHEET_PADDED_TABBAR);
 
-		VerticalLayout tab1 = generateTab(requestList);
-		VerticalLayout tab2 = generateTab(acceptedList);
-		VerticalLayout tab3 = generateTab(rejectedList);
+		VerticalLayout tab1 = generateTab(approveDeny, requestList);
+		VerticalLayout tab2 = generateTab(edit, acceptedList);
+		VerticalLayout tab3 = generateTab(approve, rejectedList);
 		
 		lists.addTab(tab1, "Requests");
 		lists.addTab(tab2, "Accepts");
@@ -115,7 +124,7 @@ public class AdminUI extends UI {
 		lists.setSizeFull();
 		left.setExpandRatio(lists, 1);
 		
-		HorizontalLayout mainLayout = new HorizontalLayout(left, requestForm);
+		HorizontalLayout mainLayout = new HorizontalLayout(left, requestForm, editForm);
 		mainLayout.setSizeFull();
 		mainLayout.setExpandRatio(left, 1);
 		
@@ -134,16 +143,18 @@ public class AdminUI extends UI {
 		rejectedList.setContainerDataSource(new BeanItemContainer<>(
 				Restaurant.class, service.findAll(stringFilter, -1)));
 		requestForm.setVisible(false);
+		editForm.setVisible(false);
 		
 	}
 	
-	private VerticalLayout generateTab(Grid t) {
+	private VerticalLayout generateTab(Button b, Grid t) {
 		final Label label = new Label();
 		label.setWidth(100.0f, Unit.PERCENTAGE);
 		
 		t.setSizeFull();
 		final VerticalLayout layout = new VerticalLayout(label);
 		layout.setMargin(true);
+		layout.addComponent(b);
 		layout.addComponent(t);
 		return layout;
 	}

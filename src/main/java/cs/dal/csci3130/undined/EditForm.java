@@ -15,10 +15,10 @@ import com.vaadin.v7.ui.TextField;
 
 import cs.dal.csci3130.undined.backend.Restaurant;
 
-public class RequestForm extends FormLayout{
+public class EditForm extends FormLayout{
 	
-	Button accept = new Button("Accept",this::accept);
-	Button reject = new Button("Reject",this::reject);
+	Button update = new Button("Update",this::update);
+	Button reject = new Button("Move to rejected",this::reject);
 	
 	TextField id = new TextField("ID");
 	TextField restaurantName = new TextField("Restaurant");
@@ -32,33 +32,33 @@ public class RequestForm extends FormLayout{
 	@SuppressWarnings("deprecation")
 	BeanFieldGroup<Restaurant> formFieldBindings;
 	
-	public RequestForm() {
+	public EditForm() {
 		configureComponents();
 		buildLayout();
 	}
 
 	private void configureComponents() {
-		accept.setStyleName(ValoTheme.BUTTON_PRIMARY);
-		accept.setClickShortcut(ShortcutAction.KeyCode.ENTER);
+		update.setStyleName(ValoTheme.BUTTON_PRIMARY);
+		update.setClickShortcut(ShortcutAction.KeyCode.ENTER);
 	}
 	
 	private void buildLayout() {
 		setSizeUndefined();
 		setMargin(true);
 		
-		HorizontalLayout actions = new HorizontalLayout(accept, reject);
+		HorizontalLayout actions = new HorizontalLayout(update, reject);
 		actions.setSpacing(true);
 		
-		addComponents(actions);
+		addComponents(actions, restaurantName, foodType, location, hoursOfBusiness);
+		
 	}
 	
-	public void accept(Button.ClickEvent event) {	
+	public void update(Button.ClickEvent event) {	
 		// Commit the fields from UI to DAO
 		try {
 			formFieldBindings.commit();
-			restaurant.setStatus(1);
 			getUI().service.save(restaurant);
-			String msg = String.format("Accepted '%s'", restaurant.getRestaurantName());
+			String msg = String.format("Updated '%s'", restaurant.getRestaurantName());
 			Notification.show(msg, Type.TRAY_NOTIFICATION);
 			getUI().refreshAll();
 		} catch (CommitException e) {
@@ -68,16 +68,13 @@ public class RequestForm extends FormLayout{
 	}
 	
 	public void reject(Button.ClickEvent event) {
-		try {
-			formFieldBindings.commit();
-			restaurant.setStatus(-1);
-			getUI().service.delete(restaurant);
-			String msg = String.format("Rejected '%s'", restaurant.getRestaurantName());
-			Notification.show(msg, Type.TRAY_NOTIFICATION);
-			getUI().refreshAll();
-		} catch (CommitException e) {
-			e.printStackTrace();
-		}
+		
+		restaurant.setStatus(-1);
+		getUI().service.delete(restaurant);
+		String msg = String.format("Rejected '%s'", restaurant.getRestaurantName());
+		Notification.show(msg, Type.TRAY_NOTIFICATION);
+		getUI().refreshAll();
+		
 	}
 	
 	void edit(Restaurant restaurant) {
