@@ -1,9 +1,10 @@
-package cs.dal.csci3130.undined.pages;
+package cs.dal.csci3130.undined.dashboard;
 
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.themes.ValoTheme;
@@ -38,6 +39,8 @@ public class RequestForm extends FormLayout{
 	}
 
 	private void configureComponents() {
+		id.setEnabled(false);
+		
 		accept.setStyleName(ValoTheme.BUTTON_PRIMARY);
 		accept.setClickShortcut(ShortcutAction.KeyCode.ENTER);
 	}

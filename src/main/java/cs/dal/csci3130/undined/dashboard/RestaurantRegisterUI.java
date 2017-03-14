@@ -1,4 +1,4 @@
-package cs.dal.csci3130.undined.pages;
+package cs.dal.csci3130.undined.dashboard;
 
 import javax.servlet.annotation.WebServlet;
 

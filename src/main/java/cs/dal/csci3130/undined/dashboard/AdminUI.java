@@ -1,4 +1,4 @@
-package cs.dal.csci3130.undined.pages;
+package cs.dal.csci3130.undined.dashboard;
 
 import javax.servlet.annotation.WebServlet;
 
@@ -41,7 +41,6 @@ public class AdminUI extends UI {
 	Grid requestList = new Grid();
 	Grid acceptedList = new Grid();
 	Grid rejectedList = new Grid();
-	Button edit = new Button("Edit");
 	
 	RequestForm requestForm = new RequestForm();
 	
@@ -57,7 +56,6 @@ public class AdminUI extends UI {
     }
 
     private void configureComponents() {
-		edit.addClickListener(e -> requestForm.edit(new Restaurant()));
 		
 		filter.setInputPrompt("Filter Requests");
 		filter.addTextChangeListener(e -> refreshAll(e.getText()));
@@ -90,7 +88,7 @@ public class AdminUI extends UI {
 
 	private void buildLayout() {
 		
-		HorizontalLayout actions = new HorizontalLayout(filter, edit);
+		HorizontalLayout actions = new HorizontalLayout(filter);
 		actions.setWidth("100%");
 		filter.setWidth("100%");
 		actions.setExpandRatio(filter, 1);
