@@ -15,7 +15,7 @@ public class Menu implements Serializable, Cloneable {
     private ArrayList<MenuItem> menu; 
 
     public Menu(){}
-    public Menu(Long id, String menuName,ArrayList<MenuItem> menu){
+    public Menu(Long id, String menuName, ArrayList<MenuItem> menu){
     	this.id = id;
     	this.menuName = menuName;
     	this.menu = menu;
