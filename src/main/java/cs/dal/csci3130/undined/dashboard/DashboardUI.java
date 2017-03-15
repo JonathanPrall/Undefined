@@ -8,6 +8,8 @@ import com.vaadin.ui.UI;
 @SuppressWarnings("serial")
 public class DashboardUI extends UI {
 
+	
+	
 	@Override
 	protected void init(VaadinRequest request) {
 		// TODO Auto-generated method stub
