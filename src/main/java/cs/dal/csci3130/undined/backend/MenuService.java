@@ -12,33 +12,6 @@ public class MenuService {
 
     private static MenuService instance;
 
-    //Code that originally filled the database with fake contacts
-    /*
-    public static ContactService createDemoService() {
-        if (instance == null) {
-
-            final ContactService contactService = new ContactService();
-
-            Random r = new Random(0);
-            Calendar cal = Calendar.getInstance();
-            for (int i = 0; i < 100; i++) {
-                Contact contact = new Contact();
-                contact.setFirstName(fnames[r.nextInt(fnames.length)]);
-                contact.setLastName(lnames[r.nextInt(fnames.length)]);
-                contact.setStartDate(cal.getTime());
-                contact.setTask("+ 358 555 " + (100 + r.nextInt(900)));
-                cal.set(1930 + r.nextInt(70),
-                        r.nextInt(11), r.nextInt(28));
-                contact.setEndDate(cal.getTime());
-                contactService.save(contact);
-            }
-            instance = contactService;
-        }
-
-        return instance;
-    }
-	*/
-
     private HashMap<Long, Menu> menus = new HashMap<>();
     private long nextId = 0;
 
