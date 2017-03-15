@@ -11,6 +11,10 @@ public class User {
 	private String email;
 	private String phone;
 	
+	public User() {
+		role = "user";
+	}
+	
 	public String getId() {
 		return id;
 	}
