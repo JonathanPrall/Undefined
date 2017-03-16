@@ -86,25 +86,6 @@
 			<version>4.2.0</version>
 			<scope>test</scope>
 		</dependency>
-		
-		<dependency>
-			<groupId>com.vaadin.addon</groupId>
-			<artifactId>jpacontainer</artifactId>
-			<version>4.0.0</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.eclipse.persistence</groupId>
-			<artifactId>eclipselink</artifactId>
-			<version>2.6.2</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<version>1.4.193</version>
-		</dependency>
-		
     </dependencies>
 
 	<build>
