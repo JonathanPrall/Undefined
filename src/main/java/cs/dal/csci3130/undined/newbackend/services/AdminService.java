@@ -1,6 +1,8 @@
-package cs.dal.csci3130.undined.newbackend;
+package cs.dal.csci3130.undined.newbackend.services;
 
 import org.apache.commons.beanutils.BeanUtils;
+
+import cs.dal.csci3130.undined.newbackend.Manager;
 
 import java.util.*;
 import java.util.logging.Level;
@@ -8,9 +10,9 @@ import java.util.logging.Logger;
 
 // Backend service class. This is just a typical Java backend implementation
 // class and nothing Vaadin specific.
-public class ManagerService {
+public class AdminService {
 
-    private static ManagerService instance;
+    private static AdminService instance;
 
     private HashMap<Long, Manager> managers = new HashMap<>();
     private long nextId = 0;
@@ -35,7 +37,7 @@ public class ManagerService {
             
             //If error, log it
             } catch (CloneNotSupportedException ex) {
-                Logger.getLogger(ManagerService.class.getName()).log(
+                Logger.getLogger(AdminService.class.getName()).log(
                         Level.SEVERE, null, ex);
             }
         }
