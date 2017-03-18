@@ -1,7 +1,8 @@
 package cs.dal.csci3130.undined.newbackend.services;
 
 import org.apache.commons.beanutils.BeanUtils;
-import cs.dal.csci3130.undined.newbackend.*;
+
+import cs.dal.csci3130.undined.domain.*;
 
 import java.util.*;
 import java.util.logging.Level;

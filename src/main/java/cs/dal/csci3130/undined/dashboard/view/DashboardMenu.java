@@ -18,7 +18,7 @@ import com.vaadin.ui.MenuBar.Command;
 import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.themes.ValoTheme;
 
-import cs.dal.csci3130.undined.backend.User;
+import cs.dal.csci3130.undined.domain.User;
 
 @SuppressWarnings({ "serial", "unchecked"})
 public final class DashboardMenu extends CustomComponent {

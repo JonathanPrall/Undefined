@@ -1,4 +1,4 @@
-package cs.dal.csci3130.undined.newbackend;
+package cs.dal.csci3130.undined.domain;
 
 import java.io.Serializable;
 

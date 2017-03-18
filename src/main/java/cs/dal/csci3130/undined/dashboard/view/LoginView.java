@@ -1,4 +1,4 @@
-package cs.dal.csci3130.undined.dashboard;
+package cs.dal.csci3130.undined.dashboard.view;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -34,8 +34,8 @@ import com.vaadin.v7.ui.Label;
 import com.vaadin.v7.ui.PasswordField;
 import com.vaadin.v7.ui.TextField;
 
-import cs.dal.csci3130.undined.backend.Restaurant;
-import cs.dal.csci3130.undined.backend.RestaurantService;
+import cs.dal.csci3130.undined.domain.Restaurant;
+import cs.dal.csci3130.undined.newbackend.services.RestaurantService;
 
 /**
  * This UI is the application entry point. A UI may either represent a browser window 

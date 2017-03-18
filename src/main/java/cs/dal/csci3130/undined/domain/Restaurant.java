@@ -1,4 +1,4 @@
-package cs.dal.csci3130.undined.backend;
+package cs.dal.csci3130.undined.domain;
 
 import org.apache.commons.beanutils.BeanUtils;
 

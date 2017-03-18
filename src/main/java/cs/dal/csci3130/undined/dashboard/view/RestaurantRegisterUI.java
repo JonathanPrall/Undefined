@@ -1,4 +1,4 @@
-package cs.dal.csci3130.undined.dashboard;
+package cs.dal.csci3130.undined.dashboard.view;
 
 import javax.servlet.annotation.WebServlet;
 
@@ -20,8 +20,8 @@ import com.vaadin.v7.ui.Grid;
 import com.vaadin.v7.ui.Label;
 import com.vaadin.v7.ui.TextField;
 
-import cs.dal.csci3130.undined.backend.Restaurant;
-import cs.dal.csci3130.undined.backend.RestaurantService;
+import cs.dal.csci3130.undined.domain.Restaurant;
+import cs.dal.csci3130.undined.newbackend.services.RestaurantService;
 
 /**
  * @author tony 

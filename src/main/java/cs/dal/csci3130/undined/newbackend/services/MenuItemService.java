@@ -11,8 +11,8 @@ import java.util.logging.Logger;
 
 import org.apache.commons.beanutils.BeanUtils;
 
-import cs.dal.csci3130.undined.newbackend.MenuItem;
-import cs.dal.csci3130.undined.newbackend.Restaurant;
+import cs.dal.csci3130.undined.domain.MenuItem;
+import cs.dal.csci3130.undined.domain.Restaurant;
 
 public class MenuItemService {
 	
