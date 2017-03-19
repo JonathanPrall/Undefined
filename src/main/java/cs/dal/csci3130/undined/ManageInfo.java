@@ -15,10 +15,10 @@ public class ManageInfo {
 	{
 		rest.setRestaurantName(name);
 	}
-	/*public void setHour(int op, int cl, int d)
+	public void setHour(int op, int cl, int d)
 	{
 		rest.setOperatingHours(op, cl, d);
-	}*/
+	}
 	public void setTable(int t)
 	{
 		sumtable=t;
@@ -61,14 +61,14 @@ public class ManageInfo {
 	{
 		return phone;
 	}
-	/*public int getOp(int d)
+	public int getOp(int d)
 	{
 	return rest.getOperatingHours(d).getOpenTime();
 	}
 	public int getCl(int d)
 	{
 		return rest.getOperatingHours(d).getCloseTime();
-	}*/
+	}
 	public String getDes()
 	{
 		return des;
