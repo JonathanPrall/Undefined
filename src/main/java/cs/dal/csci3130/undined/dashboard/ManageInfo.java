@@ -4,7 +4,7 @@ import java.util.*;
 
 import cs.dal.csci3130.undined.backend.Restaurant;
 public class ManageInfo {
-//for managing the resturant information, open hour, close hour, resturant name,email, phone, number of table and a short description about the restaurant
+//for managing the restaurant information, open hour, close hour, resturant name,email, phone, number of table and a short description about the restaurant
 	private Restaurant rest;
 	private int sumtable, available, phone;
 	private String des,email;
@@ -14,10 +14,10 @@ public class ManageInfo {
 	{
 		rest.setRestaurantName(name);
 	}
-	/*public void setHour(int op, int cl, int d)
+public void setHour(String op)
 	{
-		rest.setOperatingHours(op, cl, d);
-	}*/
+		rest.setHoursOfBusiness(op);
+	}
 	public void setTable(int t)
 	{
 		sumtable=t;
@@ -60,14 +60,6 @@ public class ManageInfo {
 	{
 		return phone;
 	}
-	/*public int getOp(int d)
-	{
-	return rest.getOperatingHours(d).getOpenTime();
-	}
-	public int getCl(int d)
-	{
-		return rest.getOperatingHours(d).getCloseTime();
-	}*/
 	public String getDes()
 	{
 		return des;
