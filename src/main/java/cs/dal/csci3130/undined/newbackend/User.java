@@ -1,24 +1,39 @@
 package cs.dal.csci3130.undined.newbackend;
 
-public class User {
+import java.io.Serializable;
+
+import org.apache.commons.beanutils.BeanUtils;
+
+public class User implements Serializable, Cloneable{
 	
-	private String id;
+	private Long id;
 	
 	private String password;
 	private String role;
 	private String firstName;
 	private String lastName;
-	private String email;
+	private String email;// username
 	private String phone;
+	
 	
 	public User() {
 		role = "user";
 	}
 	
-	public String getId() {
+	public User(Long id, String password, String role, String firstName, String lastName, String email, String phone) {
+		this.id = id;
+		this.password = password;
+		this.role = role;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.phone = phone;
+	}
+	
+	public Long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getPassword() {
@@ -58,5 +73,13 @@ public class User {
 		this.phone = phone;
 	}
 	
+	@Override
+	public User clone() throws CloneNotSupportedException {
+		try {
+			return (User) BeanUtils.cloneBean(this);
+		} catch (Exception ex) {
+			throw new CloneNotSupportedException();
+		}
+	}
 	
 }

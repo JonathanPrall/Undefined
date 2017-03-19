@@ -1,6 +1,8 @@
-package cs.dal.csci3130.undined.backend;
+package cs.dal.csci3130.undined.newbackend.services;
 
 import org.apache.commons.beanutils.BeanUtils;
+
+import cs.dal.csci3130.undined.newbackend.Manager;
 
 import java.util.*;
 import java.util.logging.Level;
@@ -11,33 +13,6 @@ import java.util.logging.Logger;
 public class ManagerService {
 
     private static ManagerService instance;
-
-    //Code that originally filled the database with fake contacts
-    /*
-    public static ContactService createDemoService() {
-        if (instance == null) {
-
-            final ContactService contactService = new ContactService();
-
-            Random r = new Random(0);
-            Calendar cal = Calendar.getInstance();
-            for (int i = 0; i < 100; i++) {
-                Contact contact = new Contact();
-                contact.setFirstName(fnames[r.nextInt(fnames.length)]);
-                contact.setLastName(lnames[r.nextInt(fnames.length)]);
-                contact.setStartDate(cal.getTime());
-                contact.setTask("+ 358 555 " + (100 + r.nextInt(900)));
-                cal.set(1930 + r.nextInt(70),
-                        r.nextInt(11), r.nextInt(28));
-                contact.setEndDate(cal.getTime());
-                contactService.save(contact);
-            }
-            instance = contactService;
-        }
-
-        return instance;
-    }
-	*/
 
     private HashMap<Long, Manager> managers = new HashMap<>();
     private long nextId = 0;
@@ -71,7 +46,7 @@ public class ManagerService {
         Collections.sort(arrayList, new Comparator<Manager>() {
             @Override
             public int compare(Manager o1, Manager o2) {
-                return (int) (o2.getId() - o1.getId());
+                return (int) (o1.getId() - o2.getId());
             }
         });
         

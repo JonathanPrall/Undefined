@@ -12,17 +12,15 @@ public class Menu implements Serializable, Cloneable {
 
     private Long id;
 
-    private String menuName = "";
     private List<MenuItem> menu; 
 
-    public Menu(Long id, String menuName){
+    public Menu() {}
+    public Menu(Long id){
     	this.id = id;
-    	this.menuName = menuName;
     	this.menu = new ArrayList<MenuItem>();
     }
-    public Menu(Long id, String menuName, List<MenuItem> menu){
+    public Menu(Long id, List<MenuItem> menu){
     	this.id = id;
-    	this.menuName = menuName;
     	this.menu = menu;
     }
     
@@ -33,16 +31,6 @@ public class Menu implements Serializable, Cloneable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    
-    //Get and set menu name
-    public String getMenuName() {
-        return menuName;
-    }
-
-    public void setMenuName(String menuName) {
-        this.menuName = menuName;
     }
 
     
@@ -60,10 +48,4 @@ public class Menu implements Serializable, Cloneable {
             throw new CloneNotSupportedException();
         }
     }
-
-    @Override
-    public String toString() {
-        return menuName;
-    }
-
 }
