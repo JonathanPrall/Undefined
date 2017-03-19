@@ -65,10 +65,7 @@ public class ManageInfo {
 	{
 	return rest.getHoursOfBusiness();
 	}
-	public int getCl(int d)
-	{
-		return rest.getOperatingHours(d).getCloseTime();
-	}
+	
 	public String getDes()
 	{
 		return des;
