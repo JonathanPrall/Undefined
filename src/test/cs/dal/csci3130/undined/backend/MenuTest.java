@@ -1,4 +1,4 @@
-package cs.dal.csci3130.Undined.backend;
+package cs.dal.csci3130.undined.backend;
 
 import static org.junit.Assert.*;
 
@@ -74,7 +74,7 @@ public class MenuTest {
 		boolean result = menu.getMenu() == al;
 		assertFalse(expect != result);
 	}
-
+/*
 	@Test
 	public void testAddMenuItemMenuItem() {
 		fail("Not yet implemented"); // TODO
@@ -89,7 +89,7 @@ public class MenuTest {
 	public void testRemoveMenuItem() {
 		fail("Not yet implemented"); // TODO
 	}
-
+*/
 	@Test
 	public void testClone() {
 		boolean expect = true;
