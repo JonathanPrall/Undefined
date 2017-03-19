@@ -1,4 +1,5 @@
 package cs.dal.csci3130.undined.dashboard;
+//Manage restaurant information UI
 
 import java.util.*;
 

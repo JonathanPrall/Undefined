@@ -6,8 +6,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ManageInfoTest {
-    //given the set/getRestName,set/getHour are from restaurant class, we are not going to test them here.
-    //and we only have empty constructor, which cannot set the original data through it, so the test both set and get at the same time
+    //given the set/getRestName,set/getHour are from restaurant class, we are not going to test them here
+    //We only have empty constructor, which cannot set the original data through it, so the test both set and get at the same time
 @Test
 public void testManageInfo(){
     boolean excpet = true;
