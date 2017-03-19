@@ -146,8 +146,8 @@ public class AdminUI extends UI {
 		return layout;
 	}
 
-	@WebServlet(urlPatterns = "/Admin/*", name = "AdminServlet", asyncSupported = true)
-    @VaadinServletConfiguration(ui = AdminUI.class, productionMode = false)
-    public static class MyUIServlet extends VaadinServlet {
-    }
+//	@WebServlet(urlPatterns = "/Admin/*", name = "AdminServlet", asyncSupported = true)
+//    @VaadinServletConfiguration(ui = AdminUI.class, productionMode = false)
+//    public static class MyUIServlet extends VaadinServlet {
+//    }
 }

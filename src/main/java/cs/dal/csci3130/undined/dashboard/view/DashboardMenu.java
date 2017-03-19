@@ -1,5 +1,6 @@
 package cs.dal.csci3130.undined.dashboard.view;
 
+import com.google.common.eventbus.Subscribe;
 import com.vaadin.server.AbstractErrorMessage.ContentMode;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.ThemeResource;
@@ -19,6 +20,7 @@ import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.themes.ValoTheme;
 
 import cs.dal.csci3130.undined.domain.User;
+import cs.dal.csci3130.undined.event.DashboardEvent.PostViewChangeEvent;
 
 @SuppressWarnings({ "serial", "unchecked"})
 public final class DashboardMenu extends CustomComponent {
@@ -124,10 +126,10 @@ public final class DashboardMenu extends CustomComponent {
 		//updateNotificationsCount(null);
 	}
 	
-//	@Subscribe
-//	public void postViewChange(final PostViewChangeEvent event) {
-//		getCompositionRoot().removeStyleName(STYLE_VISIBLE);
-//	}
+ 	@Subscribe
+ 	public void postViewChange(final PostViewChangeEvent event) {
+ 		getCompositionRoot().removeStyleName(STYLE_VISIBLE);
+ 	}
 	
 	
 }
