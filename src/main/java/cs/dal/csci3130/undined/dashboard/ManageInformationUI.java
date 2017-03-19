@@ -25,7 +25,7 @@ import com.vaadin.v7.ui.Grid;
 import com.vaadin.v7.ui.TextField;
 import com.vaadin.ui.FormLayout;
 
-import cs.dal.csci3130.undined.backend.Restaurant;
+import cs.dal.csci3130.undined.newbackend.Restaurant;
 
 import java.awt.*;
 import com.vaadin.ui.FormLayout;

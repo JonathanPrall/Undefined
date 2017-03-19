@@ -2,7 +2,7 @@ package cs.dal.csci3130.undined.dashboard;
 
 import java.util.*;
 
-import cs.dal.csci3130.undined.backend.Restaurant;
+import cs.dal.csci3130.undined.newbackend.Restaurant;
 public class ManageInfo {
 //for managing the restaurant information, open hour, close hour, resturant name,email, phone, number of table and a short description about the restaurant
 	private Restaurant rest;
