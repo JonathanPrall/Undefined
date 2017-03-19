@@ -169,7 +169,7 @@ public class AdminUI extends UI {
 		restaurantTabs.addTab(tab2, "Accepts");
 		restaurantTabs.addTab(tab3, "Rejects");
 		
-		
+		 
 		VerticalLayout restaurantPage = new VerticalLayout(searchBar, restaurantTabs);
 		restaurantPage.setSizeFull();
 		restaurantTabs.setSizeFull();
