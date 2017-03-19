@@ -1,18 +1,34 @@
 package cs.dal.csci3130.undined.backend;
 
+import org.apache.commons.beanutils.BeanUtils;
+
 //Class for storing information for an item on a restaurant's menu
 public class MenuItem
 {
+	private long id;
 	private String name = "";
 	private String description = "";
 	private float price = Float.POSITIVE_INFINITY;
 	//private picture
 	
 	//Creates the menu item with all information
-	public MenuItem(String name, String description, float price){
+	public MenuItem() {
+		
+	}
+	public MenuItem(long id, String name, String description, float price){
+		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.price = price;
+	}
+	
+	//Get and set ID
+	public long getId() {
+		return id;
+	}
+	
+	public void setId(long id) {
+		this.id = id;
 	}
 	
 	//Get and set name
@@ -41,5 +57,14 @@ public class MenuItem
 	public void setPrice(float price){
 		this.price = price;
 	}
+	
+	@Override
+    public MenuItem clone() throws CloneNotSupportedException {
+        try {
+            return (MenuItem) BeanUtils.cloneBean(this);
+        } catch (Exception ex) {
+            throw new CloneNotSupportedException();
+        }
+    }
 	
 }
