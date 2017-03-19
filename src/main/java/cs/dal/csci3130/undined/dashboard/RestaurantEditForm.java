@@ -14,9 +14,9 @@ import com.vaadin.v7.data.fieldgroup.FieldGroup.CommitException;
 import com.vaadin.v7.ui.DateField;
 import com.vaadin.v7.ui.TextField;
 
-import cs.dal.csci3130.undined.backend.Restaurant;
+import cs.dal.csci3130.undined.newbackend.Restaurant;
 
-public class EditForm extends FormLayout{
+public class RestaurantEditForm extends FormLayout{
 	
 	Button save = new Button("Save",this::save);
 	Button reject = new Button("Move to Rejects",this::reject);
@@ -34,7 +34,7 @@ public class EditForm extends FormLayout{
 	@SuppressWarnings("deprecation")
 	BeanFieldGroup<Restaurant> formFieldBindings;
 	
-	public EditForm() {
+	public RestaurantEditForm() {
 		configureComponents();
 		buildLayout();
 	}
@@ -61,7 +61,7 @@ public class EditForm extends FormLayout{
 		try {
 			formFieldBindings.commit();
 			restaurant.setStatus(1);
-			getUI().service.save(restaurant);
+			getUI().restaurantService.save(restaurant);
 			String msg = String.format("Accepted '%s'", restaurant.getRestaurantName());
 			Notification.show(msg, Type.TRAY_NOTIFICATION);
 			getUI().refreshAll();
@@ -75,7 +75,7 @@ public class EditForm extends FormLayout{
 		try {
 			formFieldBindings.commit();
 			restaurant.setStatus(-1);
-			getUI().service.delete(restaurant);
+			getUI().restaurantService.delete(restaurant);
 			String msg = String.format("Rejected '%s'", restaurant.getRestaurantName());
 			Notification.show(msg, Type.TRAY_NOTIFICATION);
 			getUI().refreshAll();
