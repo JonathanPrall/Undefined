@@ -99,7 +99,12 @@
 			<artifactId>guava</artifactId>
 			<version>18.0</version>
 		</dependency>
-    </dependencies>
+        <dependency>
+        	<groupId>com.vaadin</groupId>
+        	<artifactId>vaadin-client-compiled</artifactId>
+        	<version>7.7.7</version>
+        </dependency>
+	</dependencies>
 
 	<build>
 		<plugins>
