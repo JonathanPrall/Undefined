@@ -9,6 +9,7 @@ public class ManageInfo {
 	private int sumtable, available, phone;
 	private String des,email;
 	
+	public ManageInfo(){}
 	//set the restaurant name, operating hours,email,phone, number of table available and the description
 	public void setRestName(String name)
 	{
