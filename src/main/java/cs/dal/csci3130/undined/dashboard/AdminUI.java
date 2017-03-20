@@ -19,14 +19,14 @@ import com.vaadin.v7.ui.Grid;
 import com.vaadin.v7.ui.Label;
 import com.vaadin.v7.ui.TextField;
 
-import cs.dal.csci3130.undined.newbackend.Admin;
-import cs.dal.csci3130.undined.newbackend.Manager;
-import cs.dal.csci3130.undined.newbackend.Restaurant;
-import cs.dal.csci3130.undined.newbackend.User;
-import cs.dal.csci3130.undined.newbackend.services.AdminService;
-import cs.dal.csci3130.undined.newbackend.services.ManagerService;
-import cs.dal.csci3130.undined.newbackend.services.RestaurantService;
-import cs.dal.csci3130.undined.newbackend.services.UserService;
+import cs.dal.csci3130.undined.backend.Admin;
+import cs.dal.csci3130.undined.backend.Manager;
+import cs.dal.csci3130.undined.backend.Restaurant;
+import cs.dal.csci3130.undined.backend.User;
+import cs.dal.csci3130.undined.backend.services.AdminService;
+import cs.dal.csci3130.undined.backend.services.ManagerService;
+import cs.dal.csci3130.undined.backend.services.RestaurantService;
+import cs.dal.csci3130.undined.backend.services.UserService;
 
 
 

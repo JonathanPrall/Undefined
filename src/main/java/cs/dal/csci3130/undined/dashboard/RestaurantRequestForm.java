@@ -14,7 +14,7 @@ import com.vaadin.v7.data.fieldgroup.FieldGroup.CommitException;
 import com.vaadin.v7.ui.DateField;
 import com.vaadin.v7.ui.TextField;
 
-import cs.dal.csci3130.undined.newbackend.Restaurant;
+import cs.dal.csci3130.undined.backend.Restaurant;
 
 public class RestaurantRequestForm extends FormLayout{
 	

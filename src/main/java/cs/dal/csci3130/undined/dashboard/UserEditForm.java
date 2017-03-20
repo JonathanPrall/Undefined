@@ -15,9 +15,9 @@ import com.vaadin.v7.ui.DateField;
 import com.vaadin.v7.ui.TextField;
 
 import cs.dal.csci3130.undined.dashboard.AdminUI;
-import cs.dal.csci3130.undined.newbackend.Manager;
-import cs.dal.csci3130.undined.newbackend.Restaurant;
-import cs.dal.csci3130.undined.newbackend.User;
+import cs.dal.csci3130.undined.backend.Manager;
+import cs.dal.csci3130.undined.backend.Restaurant;
+import cs.dal.csci3130.undined.backend.User;
 
 public class UserEditForm extends FormLayout{
 	

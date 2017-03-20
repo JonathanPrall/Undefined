@@ -20,8 +20,8 @@ import com.vaadin.v7.ui.Grid;
 import com.vaadin.v7.ui.Label;
 import com.vaadin.v7.ui.TextField;
 
-import cs.dal.csci3130.undined.newbackend.Restaurant;
-import cs.dal.csci3130.undined.newbackend.services.RestaurantService;
+import cs.dal.csci3130.undined.backend.Restaurant;
+import cs.dal.csci3130.undined.backend.services.RestaurantService;
 
 /**
  * @author tony 

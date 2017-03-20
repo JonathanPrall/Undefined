@@ -1,6 +1,6 @@
 package cs.dal.csci3130.undined.dashboard;
 
-import cs.dal.csci3130.undined.newbackend.User;
+import cs.dal.csci3130.undined.backend.User;
 import cs.dal.csci3130.undined.event.DashboardEventBus;
 import com.vaadin.annotations.Theme;
 import com.vaadin.server.Page;

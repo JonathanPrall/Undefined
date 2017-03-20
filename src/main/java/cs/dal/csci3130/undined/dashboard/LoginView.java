@@ -34,8 +34,8 @@ import com.vaadin.v7.ui.Label;
 import com.vaadin.v7.ui.PasswordField;
 import com.vaadin.v7.ui.TextField;
 
-import cs.dal.csci3130.undined.newbackend.Restaurant;
-import cs.dal.csci3130.undined.newbackend.services.RestaurantService;
+import cs.dal.csci3130.undined.backend.Restaurant;
+import cs.dal.csci3130.undined.backend.services.RestaurantService;
 
 /**
  * This UI is the application entry point. A UI may either represent a browser window 

@@ -1,9 +1,9 @@
-package cs.dal.csci3130.undined.newbackend.services;
+package cs.dal.csci3130.undined.backend.services;
 
 import org.apache.commons.beanutils.BeanUtils;
 
-import cs.dal.csci3130.undined.newbackend.Menu;
-import cs.dal.csci3130.undined.newbackend.MenuItem;
+import cs.dal.csci3130.undined.backend.Menu;
+import cs.dal.csci3130.undined.backend.MenuItem;
 
 import java.util.*;
 import java.util.logging.Level;

@@ -1,4 +1,4 @@
-package cs.dal.csci3130.undined.newbackend.services;
+package cs.dal.csci3130.undined.backend.services;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,8 +11,8 @@ import java.util.logging.Logger;
 
 import org.apache.commons.beanutils.BeanUtils;
 
-import cs.dal.csci3130.undined.newbackend.MenuItem;
-import cs.dal.csci3130.undined.newbackend.Restaurant;
+import cs.dal.csci3130.undined.backend.MenuItem;
+import cs.dal.csci3130.undined.backend.Restaurant;
 
 public class MenuItemService {
 	
