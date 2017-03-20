@@ -53,7 +53,7 @@ public class LoginView extends UI {
 	final TextField userName = new TextField("Username");
 	final PasswordField password = new PasswordField("Password");
 	ComboBox select = null;
-	final CheckBox rememberMe = new CheckBox("Remeber me", true);
+	final CheckBox rememberMe = new CheckBox("Remember me", true);
 	final Button signIn = new Button("Sign In");
 	
 	@Override
