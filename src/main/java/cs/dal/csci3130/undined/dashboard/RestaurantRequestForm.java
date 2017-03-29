@@ -60,10 +60,10 @@ public class RestaurantRequestForm extends FormLayout{
 		try {
 			formFieldBindings.commit();
 			restaurant.setStatus(1);
-			getUI().restaurantService.save(restaurant);
+			getUI().adminView.restaurantService.save(restaurant);
 			String msg = String.format("Accepted '%s'", restaurant.getRestaurantName());
 			Notification.show(msg, Type.TRAY_NOTIFICATION);
-			getUI().refreshAll();
+			getUI().adminView.refreshAll();
 		} catch (CommitException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -74,10 +74,10 @@ public class RestaurantRequestForm extends FormLayout{
 		try {
 			formFieldBindings.commit();
 			restaurant.setStatus(-1);
-			getUI().restaurantService.delete(restaurant);
+			getUI().adminView.restaurantService.delete(restaurant);
 			String msg = String.format("Rejected '%s'", restaurant.getRestaurantName());
 			Notification.show(msg, Type.TRAY_NOTIFICATION);
-			getUI().refreshAll();
+			getUI().adminView.refreshAll();
 		} catch (CommitException e) {
 			e.printStackTrace();
 		}
@@ -93,8 +93,8 @@ public class RestaurantRequestForm extends FormLayout{
 	}
 	
 	
-	public AdminView getUI() {
-		return (AdminView) super.getUI();
+	public IndexUI getUI() {
+		return (IndexUI) super.getUI();
 	}
 	
 }

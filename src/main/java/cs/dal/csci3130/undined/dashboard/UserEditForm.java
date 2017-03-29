@@ -62,8 +62,8 @@ public class UserEditForm extends FormLayout{
 		// Commit the fields from UI to DAO
 		try {
 			formFieldBindings.commit();
-			getUI().userService.save(user);
-			getUI().refreshAll();
+			getUI().adminView.userService.save(user);
+			getUI().adminView.refreshAll();
 		} catch (CommitException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -71,7 +71,7 @@ public class UserEditForm extends FormLayout{
 	}
 	
 	public void cancel(Button.ClickEvent event) {
-		getUI().refreshAll();
+		getUI().adminView.refreshAll();
 	}
 	
 	void edit(User user) {
@@ -92,8 +92,8 @@ public class UserEditForm extends FormLayout{
 	}
 	
 	
-	public AdminView getUI() {
-		return (AdminView) super.getUI();
+	public IndexUI getUI() {
+		return (IndexUI) super.getUI();
 	}
 	
 }

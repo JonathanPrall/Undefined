@@ -16,10 +16,12 @@ import com.vaadin.ui.UI;
 public class IndexUI extends UI {
 
 	public LoginView loginView = new LoginView();
+	public AdminView adminView = new AdminView();
 	@Override
 	protected void init(VaadinRequest request) {
 
-		this.setContent(loginView);
+//		this.setContent(loginView);
+		this.setContent(adminView);
 	}
 
 	@WebServlet(urlPatterns = "/*", name = "IndexServlet", asyncSupported = true)
