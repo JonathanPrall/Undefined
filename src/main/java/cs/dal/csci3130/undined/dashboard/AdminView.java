@@ -41,7 +41,7 @@ import cs.dal.csci3130.undined.backend.services.UserService;
 @Title("Admin page")
 @Theme("valo")
 @Widgetset("com.vaadin.v7.Vaadin7WidgetSet")
-public class AdminUI extends UI {
+public class AdminView extends UI {
 
 	TextField restaurantSearchBar = new TextField();
 	Grid restaurantRequestList = new Grid();
@@ -255,7 +255,7 @@ public class AdminUI extends UI {
 	}
 
 	@WebServlet(urlPatterns = "/Admin/*", name = "AdminServlet", asyncSupported = true)
-    @VaadinServletConfiguration(ui = AdminUI.class, productionMode = false)
+    @VaadinServletConfiguration(ui = AdminView.class, productionMode = false)
     public static class MyUIServlet extends VaadinServlet {
     }
 }

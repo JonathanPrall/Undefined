@@ -47,7 +47,7 @@ import cs.dal.csci3130.undined.backend.services.RestaurantService;
 @Title("Undined - Index")
 @Theme("valo")
 @Widgetset("com.vaadin.v7.Vaadin7WidgetSet")
-public class LoginView extends UI {
+public class LoginView extends VerticalLayout {
 	
 	final Label title = new Label("Undined");
 	final TextField userName = new TextField("Username");
@@ -56,12 +56,17 @@ public class LoginView extends UI {
 	final CheckBox rememberMe = new CheckBox("Remember me", true);
 	final Button signIn = new Button("Sign In");
 	
-	@Override
-    protected void init(VaadinRequest vaadinRequest) {
-    	configureComponents();
-    	buildLayout();
-    }
+//	@Override
+//    protected void init(VaadinRequest vaadinRequest) {
+//    	configureComponents();
+//    	buildLayout();
+//    }
 
+	public LoginView() {
+		configureComponents();
+    	buildLayout();
+	}
+	
 	private void configureComponents() {
 		
 		// set Labels	
@@ -120,16 +125,16 @@ public class LoginView extends UI {
 		
 		// set overall
 		VerticalLayout mainLayout = new VerticalLayout();
-		mainLayout.setSizeFull();
-		mainLayout.addComponent(loginPanel);
-		mainLayout.setComponentAlignment(loginPanel, Alignment.MIDDLE_CENTER);
+		this.setSizeFull();
+		this.addComponent(loginPanel);
+		this.setComponentAlignment(loginPanel, Alignment.MIDDLE_CENTER);
 		
-		setContent(mainLayout);
+//		setContent(mainLayout);
 	}
 
 
-	@WebServlet(urlPatterns = "/*", name = "IndexServlet", asyncSupported = true)
-    @VaadinServletConfiguration(ui = LoginView.class, productionMode = false)
-    public static class MyUIServlet extends VaadinServlet {
-    }
+//	@WebServlet(urlPatterns = "/*", name = "IndexServlet", asyncSupported = true)
+//    @VaadinServletConfiguration(ui = LoginView.class, productionMode = false)
+//    public static class MyUIServlet extends VaadinServlet {
+//    }
 }

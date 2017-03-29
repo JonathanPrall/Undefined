@@ -93,8 +93,8 @@ public class RestaurantRequestForm extends FormLayout{
 	}
 	
 	
-	public AdminUI getUI() {
-		return (AdminUI) super.getUI();
+	public AdminView getUI() {
+		return (AdminView) super.getUI();
 	}
 	
 }
