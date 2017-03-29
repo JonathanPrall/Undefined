@@ -37,16 +37,7 @@ import com.vaadin.v7.ui.TextField;
 import cs.dal.csci3130.undined.backend.Restaurant;
 import cs.dal.csci3130.undined.backend.services.RestaurantService;
 
-/**
- * This UI is the application entry point. A UI may either represent a browser window 
- * (or tab) or some part of a html page where a Vaadin application is embedded.
- * <p>
- * The UI is initialized using {@link #init(VaadinRequest)}. This method is intended to be 
- * overridden to add component to the user interface and initialize non-component functionality.
- */
-@Title("Undined - Index")
-@Theme("valo")
-@Widgetset("com.vaadin.v7.Vaadin7WidgetSet")
+
 public class LoginView extends VerticalLayout {
 	
 	final Label title = new Label("Undined");
