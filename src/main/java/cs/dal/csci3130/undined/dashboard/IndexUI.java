@@ -20,8 +20,8 @@ public class IndexUI extends UI {
 	@Override
 	protected void init(VaadinRequest request) {
 
-//		this.setContent(loginView);
-		this.setContent(adminView);
+		this.setContent(loginView);
+//		this.setContent(adminView);
 	}
 
 	@WebServlet(urlPatterns = "/*", name = "IndexServlet", asyncSupported = true)

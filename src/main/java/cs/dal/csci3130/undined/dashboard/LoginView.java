@@ -88,8 +88,13 @@ public class LoginView extends VerticalLayout {
 
 			@Override
 			public void buttonClick(com.vaadin.ui.Button.ClickEvent event) {
-				// EventBus unimplemented
-				
+				if(select.getValue() == "Admin") {
+					getUI().setContent(getUI().adminView);
+				} else if (select.getValue() == "Restaurant") {
+					
+				} else if (select.getValue() == "Customer") {
+					
+				}
 			}
 		});
 		
@@ -123,6 +128,10 @@ public class LoginView extends VerticalLayout {
 //		setContent(mainLayout);
 	}
 
+	public IndexUI getUI() {
+		return (IndexUI) super.getUI();
+	}
+	
 
 //	@WebServlet(urlPatterns = "/*", name = "IndexServlet", asyncSupported = true)
 //    @VaadinServletConfiguration(ui = LoginView.class, productionMode = false)

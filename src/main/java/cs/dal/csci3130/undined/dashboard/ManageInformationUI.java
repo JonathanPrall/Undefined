@@ -38,71 +38,72 @@ import com.vaadin.v7.data.fieldgroup.BeanFieldGroup;
 @Theme("valo")
 @Widgetset("com.vaadin.v7.Vaadin7WidgetSet")
 
-public class ManageInformationUI extends UI
-{
- Button save = new Button("Save", this::save);
- Button cancel = new Button("Cancel", this::cancel);
- TextField restaurantName = new TextField("RestaurantName");
- TextField op = new TextField("OpenHour");
- TextField cl = new TextField("CloseHour");
- TextField email = new TextField("Email");
- TextField phone = new TextField("Phone");
- TextField des = new TextField("Description");
- TextField available = new TextField("# of tables are available");
- Restaurant mi;
+public class ManageInformationUI extends UI {
+	Button save = new Button("Save", this::save);
+	Button cancel = new Button("Cancel", this::cancel);
+	TextField restaurantName = new TextField("RestaurantName");
+	TextField op = new TextField("OpenHour");
+	TextField cl = new TextField("CloseHour");
+	TextField email = new TextField("Email");
+	TextField phone = new TextField("Phone");
+	TextField des = new TextField("Description");
+	TextField available = new TextField("# of tables are available");
+	Restaurant mi;
 
- BeanFieldGroup<Restaurant> formFieldBindings;
+	BeanFieldGroup<Restaurant> formFieldBindings;
 
+	private void configureComponents() {
+		save.setStyleName(ValoTheme.BUTTON_PRIMARY);
+		save.setClickShortcut(ShortcutAction.KeyCode.ENTER);
+		setVisible(true);
+	}
 
- private void configureComponents() {
-  save.setStyleName(ValoTheme.BUTTON_PRIMARY);
-  save.setClickShortcut(ShortcutAction.KeyCode.ENTER);
-  setVisible(false);
- }
- @Override
- protected void init(VaadinRequest request) {
-  configureComponents();
-  buildLayout();
- }
- private void buildLayout() {
-  FormLayout layout = new FormLayout();
-  setSizeUndefined();
-  layout.setMargin(true);
+	@Override
+	protected void init(VaadinRequest request) {
+		configureComponents();
+		buildLayout();
+	}
 
-  HorizontalLayout actions = new HorizontalLayout(save, cancel);
-  actions.setSpacing(true);
+	private void buildLayout() {
+		FormLayout layout = new FormLayout();
+		setSizeUndefined();
+		layout.setMargin(true);
 
-  layout.addComponents(actions, restaurantName, op, cl, email, phone, des, available);
- }
- public void save(Button.ClickEvent event) {
-  try {
-   formFieldBindings.commit();
-   //getUI().service.save(mi);
+		HorizontalLayout actions = new HorizontalLayout(save, cancel);
+		actions.setSpacing(true);
 
-   String msg = String.format("Saved '%s %s'.", mi.getRestaurantName());
-   Notification.show(msg, Type.TRAY_NOTIFICATION);
-   //getUI().refreshAll();
-  } catch (FieldGroup.CommitException e) {
-  }
- }
- public void cancel(Button.ClickEvent event) {
-  Notification.show("Cancelled", Type.TRAY_NOTIFICATION);
-  //getUI().select(null);
- }
+		layout.addComponents(actions, restaurantName, op, cl, email, phone, des, available);
+		setContent(layout);
+	}
 
- void edit(Restaurant mi) {
-  this.mi = mi;
-  if (mi != null) {
-   formFieldBindings = BeanFieldGroup.bindFieldsBuffered(mi,
-     this);
-   restaurantName.focus();
-  }
-  //setVisible(mi != null);
- }
+	public void save(Button.ClickEvent event) {
+		try {
+			formFieldBindings.commit();
+			// getUI().service.save(mi);
 
- @WebServlet(urlPatterns = "/Manage/*", name = "ManagerServlet", asyncSupported = true)
- @VaadinServletConfiguration(ui = ManageInformationUI.class, productionMode = false)
- public static class MyUIServlet extends VaadinServlet {
- }
+			String msg = String.format("Saved '%s %s'.", mi.getRestaurantName());
+			Notification.show(msg, Type.TRAY_NOTIFICATION);
+			// getUI().refreshAll();
+		} catch (FieldGroup.CommitException e) {
+		}
+	}
+
+	public void cancel(Button.ClickEvent event) {
+		Notification.show("Cancelled", Type.TRAY_NOTIFICATION);
+		// getUI().select(null);
+	}
+
+	void edit(Restaurant mi) {
+		this.mi = mi;
+		if (mi != null) {
+			formFieldBindings = BeanFieldGroup.bindFieldsBuffered(mi, this);
+			restaurantName.focus();
+		}
+		// setVisible(mi != null);
+	}
+
+	@WebServlet(urlPatterns = "/Manage/*", name = "ManagerServlet", asyncSupported = true)
+	@VaadinServletConfiguration(ui = ManageInformationUI.class, productionMode = false)
+	public static class MyUIServlet extends VaadinServlet {
+	}
 }
-
