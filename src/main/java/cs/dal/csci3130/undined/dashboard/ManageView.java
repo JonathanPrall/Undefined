@@ -38,7 +38,8 @@ import com.vaadin.v7.data.fieldgroup.BeanFieldGroup;
 @Theme("valo")
 @Widgetset("com.vaadin.v7.Vaadin7WidgetSet")
 
-public class ManageInformationUI extends UI {
+public class ManageView extends VerticalLayout {
+	
 	Button save = new Button("Save", this::save);
 	Button cancel = new Button("Cancel", this::cancel);
 	TextField restaurantName = new TextField("RestaurantName");
@@ -58,11 +59,16 @@ public class ManageInformationUI extends UI {
 		setVisible(true);
 	}
 
-	@Override
-	protected void init(VaadinRequest request) {
+	public ManageView() {
 		configureComponents();
 		buildLayout();
 	}
+	
+//	@Override
+//	protected void init(VaadinRequest request) {
+//		configureComponents();
+//		buildLayout();
+//	}
 
 	private void buildLayout() {
 		FormLayout layout = new FormLayout();
@@ -72,8 +78,8 @@ public class ManageInformationUI extends UI {
 		HorizontalLayout actions = new HorizontalLayout(save, cancel);
 		actions.setSpacing(true);
 
-		layout.addComponents(actions, restaurantName, op, cl, email, phone, des, available);
-		setContent(layout);
+		this.addComponents(actions, restaurantName, op, cl, email, phone, des, available);
+		
 	}
 
 	public void save(Button.ClickEvent event) {
@@ -101,9 +107,9 @@ public class ManageInformationUI extends UI {
 		}
 		// setVisible(mi != null);
 	}
-
-	@WebServlet(urlPatterns = "/Manage/*", name = "ManagerServlet", asyncSupported = true)
-	@VaadinServletConfiguration(ui = ManageInformationUI.class, productionMode = false)
-	public static class MyUIServlet extends VaadinServlet {
-	}
+//
+//	@WebServlet(urlPatterns = "/Manage/*", name = "ManagerServlet", asyncSupported = true)
+//	@VaadinServletConfiguration(ui = ManageInformationUI.class, productionMode = false)
+//	public static class MyUIServlet extends VaadinServlet {
+//	}
 }

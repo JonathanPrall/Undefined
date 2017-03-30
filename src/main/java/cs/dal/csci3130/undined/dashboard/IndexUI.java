@@ -17,6 +17,8 @@ public class IndexUI extends UI {
 
 	public LoginView loginView = new LoginView();
 	public AdminView adminView = new AdminView();
+	public ManageView manageInformationUI = new ManageView();
+	
 	@Override
 	protected void init(VaadinRequest request) {
 
