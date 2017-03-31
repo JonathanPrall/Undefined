@@ -34,9 +34,6 @@ import com.vaadin.v7.ui.DateField;
 import com.vaadin.ui.AbstractComponent;
 import com.vaadin.v7.data.fieldgroup.BeanFieldGroup;
 
-@Title("Manage Information Page")
-@Theme("valo")
-@Widgetset("com.vaadin.v7.Vaadin7WidgetSet")
 
 public class ManageView extends VerticalLayout {
 	

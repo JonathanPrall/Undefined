@@ -30,7 +30,7 @@ import cs.dal.csci3130.undined.backend.services.RestaurantService;
 @Title("Restaurant Register page")
 @Theme("valo")
 @Widgetset("com.vaadin.v7.Vaadin7WidgetSet")
-public class RestaurantRegisterUI extends UI{
+public class RestaurantRegisterView extends VerticalLayout{
 	
 	TextField restaurantName = new TextField("Restaurant Name");
 	TextField foodType = new TextField("Food Type");
@@ -42,13 +42,12 @@ public class RestaurantRegisterUI extends UI{
 	RestaurantService service = RestaurantService.createService();
 	Grid grid = new Grid();
 	
-	@Override
-    protected void init(VaadinRequest vaadinRequest) {
-    	configureComponents();
+	
+	public RestaurantRegisterView() {
+		configureComponents();
     	buildLayout();
-    	
-    }
-
+	}
+	
 	private void configureComponents() {
 		confirm.addClickListener(e -> {
 			service.save(new Restaurant(service.nextID(), restaurantName.getValue(),foodType.getValue(),location.getValue(),hoursOfBusiness.getValue()));
@@ -63,10 +62,9 @@ public class RestaurantRegisterUI extends UI{
 	
 	private void buildLayout() {
 		VerticalLayout mainPage = new VerticalLayout();
-		mainPage.addComponents(restaurantName, foodType, location, hoursOfBusiness, confirm,grid);
-		mainPage.setMargin(true);
-		mainPage.setSpacing(true);
-		setContent(mainPage);
+		this.addComponents(restaurantName, foodType, location, hoursOfBusiness, confirm,grid);
+		this.setMargin(true);
+		this.setSpacing(true);
 	}
 	
 	private void getList(){
@@ -74,9 +72,6 @@ public class RestaurantRegisterUI extends UI{
 	}
 	
 	
-	@WebServlet(urlPatterns = "/Register/*", name = "RegisterServlet", asyncSupported = true)
-    @VaadinServletConfiguration(ui = RestaurantRegisterUI.class, productionMode = false)
-    public static class MyUIServlet extends VaadinServlet {
-    }
+
 }
 

@@ -16,8 +16,13 @@ import com.vaadin.ui.UI;
 public class IndexUI extends UI {
 
 	public LoginView loginView = new LoginView();
+	
 	public AdminView adminView = new AdminView();
-	public ManageView manageInformationUI = new ManageView();
+	
+	public ManagePage managePage = new ManagePage();
+	public ManageView manageView = new ManageView();
+	public AddMenuItemView addMenuItemView = new AddMenuItemView();
+	public RestaurantRegisterView restaurantRegisterView = new RestaurantRegisterView();
 	
 	@Override
 	protected void init(VaadinRequest request) {

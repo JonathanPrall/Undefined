@@ -23,19 +23,7 @@ import cs.dal.csci3130.undined.backend.MenuItem;
 import cs.dal.csci3130.undined.backend.Menu;
 
 
-
-
-/**
- * This UI is the application entry point. A UI may either represent a browser window 
- * (or tab) or some part of a html page where a Vaadin application is embedded.
- * <p>
- * The UI is initialized using {@link #init(VaadinRequest)}. This method is intended to be 
- * overridden to add component to the user interface and initialize non-component functionality.
- */
-@Title("Add Menu Item")
-@Theme("valo")
-@Widgetset("com.vaadin.v7.Vaadin7WidgetSet")
-public class AddMenuItemUI extends UI {
+public class AddMenuItemView extends HorizontalLayout {
 
 	TextField filter = new TextField();
 	Grid menuList = new Grid();
@@ -46,14 +34,18 @@ public class AddMenuItemUI extends UI {
 	
 	Menu service = Menu.createMenu();
 	
+	public AddMenuItemView() {
+		configureComponents();
+		buildLayout();
+	}
 	
-	
-    @Override
-    protected void init(VaadinRequest vaadinRequest) {
-    	configureComponents();
-    	buildLayout();
-    	
-    }
+//	
+//    @Override
+//    protected void init(VaadinRequest vaadinRequest) {
+//    	configureComponents();
+//    	buildLayout();
+//    	
+//    }
 
     private void configureComponents() {
 		edit.addClickListener(e -> menuForm.edit(new MenuItem()));
@@ -92,11 +84,10 @@ public class AddMenuItemUI extends UI {
 		lists.setSizeFull();
 		left.setExpandRatio(lists, 1);
 		
-		HorizontalLayout mainLayout = new HorizontalLayout(left, menuForm);
-		mainLayout.setSizeFull();
-		mainLayout.setExpandRatio(left, 1);
+		this.addComponents(left, menuForm);
+		this.setSizeFull();
+		this.setExpandRatio(left, 1);
 		
-		setContent(mainLayout);
 	}
 
 	void refreshAll() {
@@ -121,8 +112,4 @@ public class AddMenuItemUI extends UI {
 		return layout;
 	}
 
-	@WebServlet(urlPatterns = "/Menu/*", name = "MyUIServlet", asyncSupported = true)
-    @VaadinServletConfiguration(ui = AddMenuItemUI.class, productionMode = false)
-    public static class MyUIServlet extends VaadinServlet {
-    }
 }

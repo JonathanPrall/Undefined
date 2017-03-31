@@ -91,7 +91,7 @@ public class LoginView extends VerticalLayout {
 				if(select.getValue() == "Admin") {
 					getUI().setContent(getUI().adminView);
 				} else if (select.getValue() == "Restaurant") {
-					getUI().setContent(getUI().manageInformationUI);
+					getUI().setContent(getUI().managePage);
 				} else if (select.getValue() == "Customer") {
 					
 				}
