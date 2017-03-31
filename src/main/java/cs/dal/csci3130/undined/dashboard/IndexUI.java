@@ -16,30 +16,38 @@ import com.vaadin.ui.UI;
 @Widgetset("com.vaadin.v7.Vaadin7WidgetSet")
 public class IndexUI extends UI {
 
+
 	public LoginView loginView;
 	public AdminView adminView;
 	public ManageView manageInformationUI;
-	
-	private RestaurantService restaurant;
-	
+	public ManagePage managePage;
+	public ManageView manageView;
+	public AddMenuItemView addMenuItemView;
+	public RestaurantRegisterView restaurantRegisterView;
+
 	@Override
 	protected void init(VaadinRequest request) {
-
 		initializeDatabase();
 		initializeLayouts();
-		//this.setContent(loginView);
-		this.setContent(manageInformationUI);
-//		this.setContent(adminView);
+
+		this.setContent(loginView);
 	}
 	
 	private void initializeDatabase(){
-		restaurant = RestaurantService.createService();
+		RestaurantService.createService();
+		//MenuService.createService();
+		//Etc...
 	}
 	
 	private void initializeLayouts(){
-		//loginView = new LoginView();
-		//adminView = new AdminView();
+		loginView = new LoginView();
+		adminView = new AdminView();
 		manageInformationUI = new ManageView();
+		managePage = new ManagePage();
+		manageView = new ManageView();
+		addMenuItemView = new AddMenuItemView();
+		restaurantRegisterView = new RestaurantRegisterView();
+		
 	}
 	
 	

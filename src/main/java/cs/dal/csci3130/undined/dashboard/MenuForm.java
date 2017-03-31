@@ -56,10 +56,10 @@ public class MenuForm extends FormLayout{
 		// Commit the fields from UI to DAO
 		try {
 			formFieldBindings.commit();
-			getUI().service.save(menuItem);
+			getUI().addMenuItemView.service.save(menuItem);
 			String msg = String.format("Accepted '%s'", menuItem.getName());
 			Notification.show(msg, Type.TRAY_NOTIFICATION);
-			getUI().refreshAll();
+			getUI().addMenuItemView.refreshAll();
 		} catch (CommitException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -67,7 +67,7 @@ public class MenuForm extends FormLayout{
 	}
 	
 	public void cancel(Button.ClickEvent event) {
-		getUI().refreshAll();
+		getUI().addMenuItemView.refreshAll();
 	}
 	
 	void edit(MenuItem menuItem) {
@@ -80,8 +80,8 @@ public class MenuForm extends FormLayout{
 	}
 	
 	
-	public AddMenuItemUI getUI() {
-		return (AddMenuItemUI) super.getUI();
+	public IndexUI getUI() {
+		return (IndexUI) super.getUI();
 	}
 	
 }
