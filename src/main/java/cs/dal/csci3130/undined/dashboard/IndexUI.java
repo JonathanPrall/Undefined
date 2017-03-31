@@ -1,6 +1,7 @@
 package cs.dal.csci3130.undined.dashboard;
 
 import javax.servlet.annotation.WebServlet;
+import cs.dal.csci3130.undined.backend.services.*;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
@@ -15,17 +16,33 @@ import com.vaadin.ui.UI;
 @Widgetset("com.vaadin.v7.Vaadin7WidgetSet")
 public class IndexUI extends UI {
 
-	public LoginView loginView = new LoginView();
-	public AdminView adminView = new AdminView();
-	public ManageView manageInformationUI = new ManageView();
+	public LoginView loginView;
+	public AdminView adminView;
+	public ManageView manageInformationUI;
+	
+	private RestaurantService restaurant;
 	
 	@Override
 	protected void init(VaadinRequest request) {
 
-		this.setContent(loginView);
+		initializeDatabase();
+		initializeLayouts();
+		//this.setContent(loginView);
+		this.setContent(manageInformationUI);
 //		this.setContent(adminView);
 	}
-
+	
+	private void initializeDatabase(){
+		restaurant = RestaurantService.createService();
+	}
+	
+	private void initializeLayouts(){
+		//loginView = new LoginView();
+		//adminView = new AdminView();
+		manageInformationUI = new ManageView();
+	}
+	
+	
 	@WebServlet(urlPatterns = "/*", name = "IndexServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = IndexUI.class, productionMode = false)
     public static class MyUIServlet extends VaadinServlet {
