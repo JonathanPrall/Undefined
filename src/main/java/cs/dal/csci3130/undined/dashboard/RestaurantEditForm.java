@@ -27,7 +27,6 @@ public class RestaurantEditForm extends FormLayout{
 	TextField foodType = new TextField("Food Type");
 	TextField location = new TextField("Location");
 	TextField hoursOfBusiness = new TextField("Working hours");
-	// should be a operating hours here
 	
 	Restaurant restaurant;
 	

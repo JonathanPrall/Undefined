@@ -2,6 +2,7 @@ package cs.dal.csci3130.undined.dashboard;
 //Manage restaurant information UI
 
 import java.util.*;
+import java.util.List;
 
 import javax.servlet.annotation.WebServlet;
 import javax.swing.*;
@@ -27,6 +28,7 @@ import com.vaadin.v7.ui.TextField;
 import com.vaadin.ui.FormLayout;
 
 import cs.dal.csci3130.undined.backend.Restaurant;
+import cs.dal.csci3130.undined.backend.services.RestaurantService;
 
 import java.awt.*;
 import com.vaadin.ui.FormLayout;
@@ -42,20 +44,28 @@ public class ManageView extends VerticalLayout {
 	
 	Button save = new Button("Save", this::save);
 	Button cancel = new Button("Cancel", this::cancel);
-	TextField restaurantName = new TextField("RestaurantName");
-	TextField op = new TextField("OpenHour");
-	TextField cl = new TextField("CloseHour");
-	TextField email = new TextField("Email");
-	TextField phone = new TextField("Phone");
-	TextField des = new TextField("Description");
-	TextField available = new TextField("# of tables are available");
-	Restaurant mi;
+	TextField restaurantName = new TextField("Restaurant Name");
+	TextField hoursOfBusiness = new TextField("Hours of Business");
+	TextField foodType = new TextField("Type of Food");
+	TextField location = new TextField("Location");
+
+	Restaurant restaurant;
 
 	BeanFieldGroup<Restaurant> formFieldBindings;
 
 	private void configureComponents() {
+		Random rand = new Random();
+		
+		List<Restaurant> restaurantList = RestaurantService.createService().findAll();
+		
+		restaurant = restaurantList.get(rand.nextInt(restaurantList.size()));
+		
 		save.setStyleName(ValoTheme.BUTTON_PRIMARY);
 		save.setClickShortcut(ShortcutAction.KeyCode.ENTER);
+		
+		formFieldBindings = BeanFieldGroup.bindFieldsBuffered(restaurant, this);
+		restaurantName.focus();
+		
 		setVisible(true);
 	}
 
@@ -63,12 +73,6 @@ public class ManageView extends VerticalLayout {
 		configureComponents();
 		buildLayout();
 	}
-	
-//	@Override
-//	protected void init(VaadinRequest request) {
-//		configureComponents();
-//		buildLayout();
-//	}
 
 	private void buildLayout() {
 		FormLayout layout = new FormLayout();
@@ -78,38 +82,23 @@ public class ManageView extends VerticalLayout {
 		HorizontalLayout actions = new HorizontalLayout(save, cancel);
 		actions.setSpacing(true);
 
-		this.addComponents(actions, restaurantName, op, cl, email, phone, des, available);
+		this.addComponents(actions, restaurantName, foodType, hoursOfBusiness, location);
 		
 	}
 
 	public void save(Button.ClickEvent event) {
 		try {
 			formFieldBindings.commit();
-			// getUI().service.save(mi);
+			RestaurantService.createService().save(restaurant);
 
-			String msg = String.format("Saved '%s %s'.", mi.getRestaurantName());
+			String msg = String.format("Saved '%s'.", restaurant.getRestaurantName());
 			Notification.show(msg, Type.TRAY_NOTIFICATION);
-			// getUI().refreshAll();
 		} catch (FieldGroup.CommitException e) {
 		}
 	}
 
 	public void cancel(Button.ClickEvent event) {
 		Notification.show("Cancelled", Type.TRAY_NOTIFICATION);
-		// getUI().select(null);
+		formFieldBindings = BeanFieldGroup.bindFieldsBuffered(restaurant, this);
 	}
-
-	void edit(Restaurant mi) {
-		this.mi = mi;
-		if (mi != null) {
-			formFieldBindings = BeanFieldGroup.bindFieldsBuffered(mi, this);
-			restaurantName.focus();
-		}
-		// setVisible(mi != null);
-	}
-//
-//	@WebServlet(urlPatterns = "/Manage/*", name = "ManagerServlet", asyncSupported = true)
-//	@VaadinServletConfiguration(ui = ManageInformationUI.class, productionMode = false)
-//	public static class MyUIServlet extends VaadinServlet {
-//	}
 }
