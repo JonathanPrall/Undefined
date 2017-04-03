@@ -19,29 +19,17 @@ import com.vaadin.v7.ui.Grid;
 import com.vaadin.v7.ui.Label;
 import com.vaadin.v7.ui.TextField;
 
-import cs.dal.csci3130.undined.newbackend.Admin;
-import cs.dal.csci3130.undined.newbackend.Manager;
-import cs.dal.csci3130.undined.newbackend.Restaurant;
-import cs.dal.csci3130.undined.newbackend.User;
-import cs.dal.csci3130.undined.newbackend.services.AdminService;
-import cs.dal.csci3130.undined.newbackend.services.ManagerService;
-import cs.dal.csci3130.undined.newbackend.services.RestaurantService;
-import cs.dal.csci3130.undined.newbackend.services.UserService;
+import cs.dal.csci3130.undined.backend.Admin;
+import cs.dal.csci3130.undined.backend.Manager;
+import cs.dal.csci3130.undined.backend.Restaurant;
+import cs.dal.csci3130.undined.backend.User;
+import cs.dal.csci3130.undined.backend.services.AdminService;
+import cs.dal.csci3130.undined.backend.services.ManagerService;
+import cs.dal.csci3130.undined.backend.services.RestaurantService;
+import cs.dal.csci3130.undined.backend.services.UserService;
 
 
-
-
-/**
- * This UI is the application entry point. A UI may either represent a browser window 
- * (or tab) or some part of a html page where a Vaadin application is embedded.
- * <p>
- * The UI is initialized using {@link #init(VaadinRequest)}. This method is intended to be
- * overridden to add component to the user interface and initialize non-component functionality.
- */
-@Title("Admin page")
-@Theme("valo")
-@Widgetset("com.vaadin.v7.Vaadin7WidgetSet")
-public class AdminUI extends UI {
+public class AdminView extends VerticalLayout {
 
 	TextField restaurantSearchBar = new TextField();
 	Grid restaurantRequestList = new Grid();
@@ -63,12 +51,16 @@ public class AdminUI extends UI {
 	
 	UserEditForm userEditForm = new UserEditForm();
 	
+	public AdminView() {
+		configureComponents();
+		buildLayout();
+	}
 	
-    @Override
-    protected void init(VaadinRequest vaadinRequest) {
-    	configureComponents();
-    	buildLayout();
-    }
+//    @Override
+//    protected void init(VaadinRequest vaadinRequest) {
+//    	configureComponents();
+//    	buildLayout();
+//    }
 
     private void configureComponents() {
 		
@@ -145,9 +137,11 @@ public class AdminUI extends UI {
 		navigationTab.addTab(restaurantPage, "Restaurant");
 		navigationTab.addTab(userPage, "User");
 		
+		this.addComponent(navigationTab);
 		
-		VerticalLayout mainLayout = new VerticalLayout(navigationTab);
-		setContent(mainLayout);
+//		
+//		VerticalLayout mainLayout = new VerticalLayout(navigationTab);
+//		setContent(mainLayout);
 	}
 
 	HorizontalLayout buildRestaurantPage(){
@@ -254,8 +248,4 @@ public class AdminUI extends UI {
 		return layout;
 	}
 
-	@WebServlet(urlPatterns = "/Admin/*", name = "AdminServlet", asyncSupported = true)
-    @VaadinServletConfiguration(ui = AdminUI.class, productionMode = false)
-    public static class MyUIServlet extends VaadinServlet {
-    }
 }

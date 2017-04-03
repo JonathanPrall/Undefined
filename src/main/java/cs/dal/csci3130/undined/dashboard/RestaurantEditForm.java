@@ -14,7 +14,7 @@ import com.vaadin.v7.data.fieldgroup.FieldGroup.CommitException;
 import com.vaadin.v7.ui.DateField;
 import com.vaadin.v7.ui.TextField;
 
-import cs.dal.csci3130.undined.newbackend.Restaurant;
+import cs.dal.csci3130.undined.backend.Restaurant;
 
 public class RestaurantEditForm extends FormLayout{
 	
@@ -27,7 +27,6 @@ public class RestaurantEditForm extends FormLayout{
 	TextField foodType = new TextField("Food Type");
 	TextField location = new TextField("Location");
 	TextField hoursOfBusiness = new TextField("Working hours");
-	// should be a operating hours here
 	
 	Restaurant restaurant;
 	
@@ -61,10 +60,10 @@ public class RestaurantEditForm extends FormLayout{
 		try {
 			formFieldBindings.commit();
 			restaurant.setStatus(1);
-			getUI().restaurantService.save(restaurant);
+			getUI().adminView.restaurantService.save(restaurant);
 			String msg = String.format("Accepted '%s'", restaurant.getRestaurantName());
 			Notification.show(msg, Type.TRAY_NOTIFICATION);
-			getUI().refreshAll();
+			getUI().adminView.refreshAll();
 		} catch (CommitException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -75,17 +74,17 @@ public class RestaurantEditForm extends FormLayout{
 		try {
 			formFieldBindings.commit();
 			restaurant.setStatus(-1);
-			getUI().restaurantService.delete(restaurant);
+			getUI().adminView.restaurantService.delete(restaurant);
 			String msg = String.format("Rejected '%s'", restaurant.getRestaurantName());
 			Notification.show(msg, Type.TRAY_NOTIFICATION);
-			getUI().refreshAll();
+			getUI().adminView.refreshAll();
 		} catch (CommitException e) {
 			e.printStackTrace();
 		}
 	}
 	
 	public void cancel(Button.ClickEvent event) {
-		getUI().refreshAll();
+		getUI().adminView.refreshAll();
 	}
 	
 	void edit(Restaurant restaurant) {
@@ -98,8 +97,8 @@ public class RestaurantEditForm extends FormLayout{
 	}
 	
 	
-	public AdminUI getUI() {
-		return (AdminUI) super.getUI();
+	public IndexUI getUI() {
+		return (IndexUI) super.getUI();
 	}
 	
 }

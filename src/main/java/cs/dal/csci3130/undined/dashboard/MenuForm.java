@@ -4,7 +4,6 @@ import com.vaadin.event.ShortcutAction;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.themes.ValoTheme;
@@ -14,34 +13,30 @@ import com.vaadin.v7.data.fieldgroup.FieldGroup.CommitException;
 import com.vaadin.v7.ui.DateField;
 import com.vaadin.v7.ui.TextField;
 
-import cs.dal.csci3130.undined.backend.Manager;
-import cs.dal.csci3130.undined.backend.Restaurant;
-import cs.dal.csci3130.undined.backend.User;
+import cs.dal.csci3130.undined.backend.MenuItem;
 
-public class UserEditForm extends FormLayout{
+public class MenuForm extends FormLayout{
 	
 	Button save = new Button("Save",this::save);
-	Button cancel = new Button("Cancel", this::cancel);
+	Button cancel = new Button("Cancel",this::cancel);
 	
-	TextField firstName = new TextField("First Name");
-	TextField lastName = new TextField("Last Name");
-	TextField role = new TextField("Role");
-	TextField email = new TextField("Email Address");
-	TextField phone = new TextField("Phone Number");
+	TextField name = new TextField("Name");
+	TextField description = new TextField("Description");
+	TextField price = new TextField("Price");
+
+	// should be a operating hours here
 	
-	User user;
+	MenuItem menuItem;
 	
 	@SuppressWarnings("deprecation")
-	BeanFieldGroup<User> formFieldBindings;
-	BeanFieldGroup<Manager> managerFormFieldBindings;
+	BeanFieldGroup<MenuItem> formFieldBindings;
 	
-	public UserEditForm() {
+	public MenuForm() {
 		configureComponents();
 		buildLayout();
 	}
 
 	private void configureComponents() {
-		
 		save.setStyleName(ValoTheme.BUTTON_PRIMARY);
 		save.setClickShortcut(ShortcutAction.KeyCode.ENTER);
 	}
@@ -53,7 +48,7 @@ public class UserEditForm extends FormLayout{
 		HorizontalLayout actions = new HorizontalLayout(save, cancel);
 		actions.setSpacing(true);
 		
-		addComponents(actions, firstName, lastName, role, email, phone);
+		addComponents(actions, name, description, price);
 		
 	}
 	
@@ -61,8 +56,10 @@ public class UserEditForm extends FormLayout{
 		// Commit the fields from UI to DAO
 		try {
 			formFieldBindings.commit();
-			getUI().adminView.userService.save(user);
-			getUI().adminView.refreshAll();
+			getUI().addMenuItemView.service.save(menuItem);
+			String msg = String.format("Accepted '%s'", menuItem.getName());
+			Notification.show(msg, Type.TRAY_NOTIFICATION);
+			getUI().addMenuItemView.refreshAll();
 		} catch (CommitException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -70,24 +67,16 @@ public class UserEditForm extends FormLayout{
 	}
 	
 	public void cancel(Button.ClickEvent event) {
-		getUI().adminView.refreshAll();
+		getUI().addMenuItemView.refreshAll();
 	}
 	
-	void edit(User user) {
-		this.user = user;
-		if(user != null) {
-			formFieldBindings = BeanFieldGroup.bindFieldsBuffered(user, this);
-			firstName.focus();
+	void edit(MenuItem menuItem) {
+		this.menuItem = menuItem;
+		if(menuItem != null) {
+			formFieldBindings = BeanFieldGroup.bindFieldsBuffered(menuItem, this);
+			name.focus();
 		}
-		setVisible(user != null);
-	}
-	
-	void edit(Manager manager) {
-		if(manager != null) {
-			managerFormFieldBindings = BeanFieldGroup.bindFieldsBuffered(manager, this);
-			firstName.focus();
-		}
-		setVisible(manager != null);
+		setVisible(menuItem != null);
 	}
 	
 	

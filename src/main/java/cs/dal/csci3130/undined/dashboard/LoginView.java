@@ -34,34 +34,30 @@ import com.vaadin.v7.ui.Label;
 import com.vaadin.v7.ui.PasswordField;
 import com.vaadin.v7.ui.TextField;
 
-import cs.dal.csci3130.undined.newbackend.Restaurant;
-import cs.dal.csci3130.undined.newbackend.services.RestaurantService;
+import cs.dal.csci3130.undined.backend.Restaurant;
+import cs.dal.csci3130.undined.backend.services.RestaurantService;
 
-/**
- * This UI is the application entry point. A UI may either represent a browser window 
- * (or tab) or some part of a html page where a Vaadin application is embedded.
- * <p>
- * The UI is initialized using {@link #init(VaadinRequest)}. This method is intended to be 
- * overridden to add component to the user interface and initialize non-component functionality.
- */
-@Title("Undined - Index")
-@Theme("valo")
-@Widgetset("com.vaadin.v7.Vaadin7WidgetSet")
-public class LoginView extends UI {
+
+public class LoginView extends VerticalLayout {
 	
 	final Label title = new Label("Undined");
 	final TextField userName = new TextField("Username");
 	final PasswordField password = new PasswordField("Password");
 	ComboBox select = null;
-	final CheckBox rememberMe = new CheckBox("Remeber me", true);
+	final CheckBox rememberMe = new CheckBox("Remember me", true);
 	final Button signIn = new Button("Sign In");
 	
-	@Override
-    protected void init(VaadinRequest vaadinRequest) {
-    	configureComponents();
-    	buildLayout();
-    }
+//	@Override
+//    protected void init(VaadinRequest vaadinRequest) {
+//    	configureComponents();
+//    	buildLayout();
+//    }
 
+	public LoginView() {
+		configureComponents();
+    	buildLayout();
+	}
+	
 	private void configureComponents() {
 		
 		// set Labels	
@@ -92,8 +88,13 @@ public class LoginView extends UI {
 
 			@Override
 			public void buttonClick(com.vaadin.ui.Button.ClickEvent event) {
-				// EventBus unimplemented
-				
+				if(select.getValue() == "Admin") {
+					getUI().setContent(getUI().adminView);
+				} else if (select.getValue() == "Restaurant") {
+					getUI().setContent(getUI().managePage);
+				} else if (select.getValue() == "Customer") {
+					
+				}
 			}
 		});
 		
@@ -120,16 +121,20 @@ public class LoginView extends UI {
 		
 		// set overall
 		VerticalLayout mainLayout = new VerticalLayout();
-		mainLayout.setSizeFull();
-		mainLayout.addComponent(loginPanel);
-		mainLayout.setComponentAlignment(loginPanel, Alignment.MIDDLE_CENTER);
+		this.setSizeFull();
+		this.addComponent(loginPanel);
+		this.setComponentAlignment(loginPanel, Alignment.MIDDLE_CENTER);
 		
-		setContent(mainLayout);
+//		setContent(mainLayout);
 	}
 
+	public IndexUI getUI() {
+		return (IndexUI) super.getUI();
+	}
+	
 
-	@WebServlet(urlPatterns = "/*", name = "IndexServlet", asyncSupported = true)
-    @VaadinServletConfiguration(ui = LoginView.class, productionMode = false)
-    public static class MyUIServlet extends VaadinServlet {
-    }
+//	@WebServlet(urlPatterns = "/*", name = "IndexServlet", asyncSupported = true)
+//    @VaadinServletConfiguration(ui = LoginView.class, productionMode = false)
+//    public static class MyUIServlet extends VaadinServlet {
+//    }
 }
