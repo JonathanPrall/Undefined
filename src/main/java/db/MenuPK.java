@@ -1,4 +1,4 @@
-package cs.dal.csci3130.undined.newbackend.model;
+package db;
 
 import java.io.Serializable;
 import javax.persistence.*;
