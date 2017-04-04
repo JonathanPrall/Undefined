@@ -93,7 +93,7 @@ public class LoginView extends VerticalLayout {
 				} else if (select.getValue() == "Restaurant") {
 					getUI().setContent(getUI().managePage);
 				} else if (select.getValue() == "Customer") {
-					
+					getUI().setContent(getUI().customerView);
 				}
 			}
 		});

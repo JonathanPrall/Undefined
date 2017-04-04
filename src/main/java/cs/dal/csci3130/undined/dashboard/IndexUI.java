@@ -24,12 +24,12 @@ public class IndexUI extends UI {
 	public ManageView manageView;
 	public AddMenuItemView addMenuItemView;
 	public RestaurantRegisterView restaurantRegisterView;
+	public CustomerView customerView;
 
 	@Override
 	protected void init(VaadinRequest request) {
 		initializeDatabase();
 		initializeLayouts();
-
 		this.setContent(loginView);
 	}
 	
@@ -47,7 +47,7 @@ public class IndexUI extends UI {
 		manageView = new ManageView();
 		addMenuItemView = new AddMenuItemView();
 		restaurantRegisterView = new RestaurantRegisterView();
-		
+		customerView = new CustomerView();
 	}
 	
 	
