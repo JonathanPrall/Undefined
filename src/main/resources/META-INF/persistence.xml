@@ -2,12 +2,12 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="undinedPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>db.Menu</class>
-    <class>db.MenuPK</class>
-    <class>db.MenuItem</class>
-    <class>db.Restaurant</class>
-    <class>db.Review</class>
-    <class>db.User</class>
+    <class>model.Menu</class>
+    <class>model.MenuPK</class>
+    <class>model.MenuItem</class>
+    <class>model.Restaurant</class>
+    <class>model.Review</class>
+    <class>model.User</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/kutesa?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="class"/>
