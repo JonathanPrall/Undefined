@@ -85,6 +85,22 @@ public class ManagerService {
         //Return it
         return arrayList;
     }
+    
+    public synchronized int findOne(String email, String password) {
+    	// 0 username not found
+    	// 1 username found but password wrong
+    	// 2 passed
+    	int flag = 0;
+    	for (Manager manager: managers.values()) {
+    		if (manager.getEmail().equals(email)) {
+    			flag = 1;
+    			if (manager.getPassword().equals(password)) {
+    				flag = 2;
+    			}
+    		}
+    	}
+    	return flag;
+    }
 
     public synchronized long count() {
         return managers.size();

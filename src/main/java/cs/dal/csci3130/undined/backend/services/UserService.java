@@ -84,7 +84,22 @@ public class UserService {
         //Return it
         return arrayList;
     }
-
+    
+    public synchronized int findOne(String email, String password) {
+    	// 0 username not found
+    	// 1 username found but password wrong
+    	// 2 passed
+    	int flag = 0;
+    	for (User user: users.values()) {
+    		if (user.getEmail().equals(email)) {
+    			flag = 1;
+    			if (user.getPassword().equals(password)) {
+    				flag = 2;
+    			}
+    		}
+    	}
+    	return flag;
+    }
     public synchronized long count() {
         return users.size();
     }

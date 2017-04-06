@@ -42,31 +42,7 @@ public class AdminService {
     		admin.setEmail("admin");
     		admin.setPhone(phone[0]);
     		adminService.save(admin);
-    		
-//    		// users
-//    		for(int i = 0; i < 5; i++) {
-//    			User user = new User();
-//    			user.setId(nextId++);
-//    			user.setPassword(password[2]);
-//    			user.setRole("user");
-//    			user.setFirstName(firstName[r.nextInt(firstName.length)]);
-//    			user.setLastName(lastName[r.nextInt(lastName.length)]);
-//    			user.setEmail("user" + Integer.toString(i));
-//    			user.setPhone(phone[0]);
-//        		adminService.save(user);
-//    		}
-//    		// manager
-//    		for(int i = 0; i < 3; i++) {
-//    			Manager manager = new Manager();
-//    			manager.setId(nextId++);
-//    			manager.setPassword(password[1]);
-//    			manager.setRole("manager");
-//    			manager.setFirstName(firstName[r.nextInt(firstName.length)]);
-//    			manager.setLastName(lastName[r.nextInt(lastName.length)]);
-//    			manager.setEmail("manager" + Long.toString(nextId));
-//    			manager.setPhone(phone[0]);
-//        		adminService.save(manager);
-//    		}
+
     		
     		instance = adminService;
     	}
@@ -110,6 +86,22 @@ public class AdminService {
         return arrayList;
     }
 
+    public synchronized int findOne(String email, String password) {
+    	// 0 username not found
+    	// 1 username found but password wrong
+    	// 2 passed
+    	int flag = 0;
+    	for (Admin admin: admins.values()) {
+    		if (admin.getEmail().equals(email)) {
+    			flag = 1;
+    			if (admin.getPassword().equals(password)) {
+    				flag = 2;
+    			}
+    		}
+    	}
+    	return flag;
+    }
+    
     public synchronized long count() {
         return admins.size();
     }

@@ -19,9 +19,11 @@ import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
@@ -89,11 +91,45 @@ public class LoginView extends VerticalLayout {
 			@Override
 			public void buttonClick(com.vaadin.ui.Button.ClickEvent event) {
 				if(select.getValue() == "Admin") {
-					getUI().setContent(getUI().adminView);
+					int flag = getUI().adminView.adminService.findOne(userName.getValue(), password.getValue());
+					if (flag == 0) {
+						String msg = "Account doesn't exist!";
+			            Notification.show(msg, Type.WARNING_MESSAGE);
+						
+					} else if (flag == 1) {
+						String msg = "Wrong password!";
+			            Notification.show(msg, Type.WARNING_MESSAGE);
+					} else if (flag == 2) {
+						getUI().setContent(getUI().adminView);
+					}
 				} else if (select.getValue() == "Restaurant") {
-					getUI().setContent(getUI().managePage);
+					
+					int flag = getUI().adminView.managerService.findOne(userName.getValue(), password.getValue());
+					if (flag == 0) {
+						String msg = "Account doesn't exist!";
+			            Notification.show(msg, Type.WARNING_MESSAGE);
+						
+					} else if (flag == 1) {
+						String msg = "Wrong password!";
+			            Notification.show(msg, Type.WARNING_MESSAGE);
+					} else if (flag == 2) {
+						getUI().setContent(getUI().managePage);
+					}
+					
 				} else if (select.getValue() == "Customer") {
-					getUI().setContent(getUI().customerView);
+					
+					int flag = getUI().adminView.userService.findOne(userName.getValue(), password.getValue());
+					if (flag == 0) {
+						String msg = "Account doesn't exist!";
+			            Notification.show(msg, Type.WARNING_MESSAGE);
+						
+					} else if (flag == 1) {
+						String msg = "Wrong password!";
+			            Notification.show(msg, Type.WARNING_MESSAGE);
+					} else if (flag == 2) {
+						getUI().setContent(getUI().customerView);
+					}
+					
 				}
 			}
 		});
