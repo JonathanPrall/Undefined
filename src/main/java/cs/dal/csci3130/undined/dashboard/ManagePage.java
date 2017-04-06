@@ -1,5 +1,6 @@
 package cs.dal.csci3130.undined.dashboard;
 
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -15,29 +16,32 @@ public class ManagePage extends HorizontalLayout {
 		this.manageInfo.addClickListener(new ClickListener() {
 			@Override
 			public void buttonClick(ClickEvent event) {
-				removeAllComponents();
-				setSizeFull();
-				addComponent(getUI().manageView);
+
+				getUI().setContent(getUI().manageView);
 			}
 		});
 		this.addMenuItem.addClickListener(new ClickListener() {
 			@Override
 			public void buttonClick(ClickEvent event) {
-				removeAllComponents();
-				setSizeFull();
-				addComponent(getUI().addMenuItemView);
+				
+				getUI().setContent(getUI().addMenuItemView);
 			}
 		});
 		this.requestRegist.addClickListener(new ClickListener() {
 			@Override
 			public void buttonClick(ClickEvent event) {
-				removeAllComponents();
-				setSizeFull();
-				addComponent(getUI().restaurantRegisterView);
+
+				getUI().setContent(getUI().restaurantRegisterView);
 			}
 		});
 
+//		this.setSizeUndefined();
+		this.setSizeFull();
 		this.addComponents(manageInfo, addMenuItem, requestRegist);
+		this.setComponentAlignment(manageInfo, Alignment.MIDDLE_CENTER);
+		this.setComponentAlignment(addMenuItem, Alignment.MIDDLE_CENTER);
+		this.setComponentAlignment(requestRegist, Alignment.MIDDLE_CENTER);
+		
 	}
 
 	public IndexUI getUI() {

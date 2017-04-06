@@ -6,9 +6,13 @@ import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Widgetset;
+import com.vaadin.server.FontAwesome;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.UI;
@@ -23,8 +27,11 @@ import cs.dal.csci3130.undined.backend.MenuItem;
 import cs.dal.csci3130.undined.backend.Menu;
 
 
-public class AddMenuItemView extends HorizontalLayout {
+public class AddMenuItemView extends VerticalLayout {
 
+	Button logout = new Button("Log out");
+	
+	
 	TextField filter = new TextField();
 	Grid menuList = new Grid();
 	Button edit = new Button("Edit");
@@ -48,7 +55,18 @@ public class AddMenuItemView extends HorizontalLayout {
 //    }
 
     private void configureComponents() {
-		edit.addClickListener(e -> menuForm.edit(new MenuItem()));
+		
+    	logout.setIcon(FontAwesome.SIGN_OUT);
+		logout.addClickListener(new ClickListener() {
+
+			@Override
+			public void buttonClick(ClickEvent event) {
+				getUI().setContent(getUI().loginView);
+			}
+			
+		});
+    	
+    	edit.addClickListener(e -> menuForm.edit(new MenuItem()));
 		
 		filter.setInputPrompt("Filter Menu Items");
 		filter.addTextChangeListener(e -> refreshAll(e.getText()));
@@ -63,6 +81,7 @@ public class AddMenuItemView extends HorizontalLayout {
     
 
 	private void buildLayout() {
+		
 		
 		HorizontalLayout actions = new HorizontalLayout(filter, edit);
 		actions.setWidth("100%");
@@ -84,10 +103,23 @@ public class AddMenuItemView extends HorizontalLayout {
 		lists.setSizeFull();
 		left.setExpandRatio(lists, 1);
 		
-		this.addComponents(left, menuForm);
-		this.setSizeFull();
-		this.setExpandRatio(left, 1);
+		HorizontalLayout logoutBar = buildLogout();
+		HorizontalLayout main = new HorizontalLayout();
 		
+		
+		main.addComponents(left, menuForm);
+		main.setSizeFull();
+		main.setExpandRatio(left, 1);
+		
+		this.addComponents(logoutBar, main);
+	}
+	HorizontalLayout buildLogout() {
+		HorizontalLayout logoutBar = new HorizontalLayout();
+		logoutBar.setSizeFull();
+		logoutBar.addComponent(this.logout);
+		logoutBar.setComponentAlignment(logout, Alignment.MIDDLE_RIGHT);
+		
+		return logoutBar; 
 	}
 
 	void refreshAll() {
@@ -111,5 +143,7 @@ public class AddMenuItemView extends HorizontalLayout {
 		layout.addComponent(t);
 		return layout;
 	}
-
+	public IndexUI getUI() {
+		return (IndexUI) super.getUI();
+	}
 }

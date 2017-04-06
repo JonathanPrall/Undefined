@@ -6,9 +6,13 @@ import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Widgetset;
+import com.vaadin.server.FontAwesome;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.UI;
@@ -31,6 +35,8 @@ import cs.dal.csci3130.undined.backend.services.UserService;
 
 public class AdminView extends VerticalLayout {
 
+	Button logout = new Button("Log out");
+	
 	TextField restaurantSearchBar = new TextField();
 	Grid restaurantRequestList = new Grid();
 	Grid restaurantAcceptedList = new Grid();
@@ -64,6 +70,18 @@ public class AdminView extends VerticalLayout {
 
     private void configureComponents() {
 		
+    	//
+    	logout.setIcon(FontAwesome.SIGN_OUT);
+    	logout.addClickListener(new ClickListener() {
+
+			@Override
+			public void buttonClick(ClickEvent event) {
+				getUI().setContent(getUI().loginView);
+			}
+    		
+    	});
+    	//
+    	
     	restaurantSearchBar.setInputPrompt("Search Restaurants...");
     	restaurantSearchBar.addTextChangeListener(e -> refreshAll());
 		
@@ -131,19 +149,29 @@ public class AdminView extends VerticalLayout {
 		
 		
 		//Build pages
+		HorizontalLayout logoutBar = buildLogout();
 		HorizontalLayout restaurantPage = buildRestaurantPage();
 		HorizontalLayout userPage = buildUserPage();
 		
 		navigationTab.addTab(restaurantPage, "Restaurant");
 		navigationTab.addTab(userPage, "User");
 		
-		this.addComponent(navigationTab);
+		this.addComponents(logoutBar, navigationTab);
 		
 //		
 //		VerticalLayout mainLayout = new VerticalLayout(navigationTab);
 //		setContent(mainLayout);
 	}
 
+	HorizontalLayout buildLogout() {
+		HorizontalLayout logoutBar = new HorizontalLayout();
+		logoutBar.setSizeFull();
+		logoutBar.addComponent(this.logout);
+		logoutBar.setComponentAlignment(logout, Alignment.MIDDLE_RIGHT);
+		
+		return logoutBar; 
+	}
+	
 	HorizontalLayout buildRestaurantPage(){
 		HorizontalLayout searchBar = new HorizontalLayout(restaurantSearchBar);
 		searchBar.setWidth("100%");
@@ -248,4 +276,7 @@ public class AdminView extends VerticalLayout {
 		return layout;
 	}
 
+	public IndexUI getUI() {
+		return (IndexUI) super.getUI();
+	}
 }

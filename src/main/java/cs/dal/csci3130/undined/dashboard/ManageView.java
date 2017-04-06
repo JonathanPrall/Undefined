@@ -11,9 +11,12 @@ import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Widgetset;
 import com.vaadin.event.ShortcutAction;
+import com.vaadin.server.FontAwesome;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Notification.Type;
@@ -34,6 +37,7 @@ import java.awt.*;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.v7.ui.DateField;
 import com.vaadin.ui.AbstractComponent;
+import com.vaadin.ui.Alignment;
 import com.vaadin.v7.data.fieldgroup.BeanFieldGroup;
 
 @Title("Manage Information Page")
@@ -41,6 +45,9 @@ import com.vaadin.v7.data.fieldgroup.BeanFieldGroup;
 @Widgetset("com.vaadin.v7.Vaadin7WidgetSet")
 
 public class ManageView extends VerticalLayout {
+	
+	Button logout = new Button("Log out");
+	
 	
 	Button save = new Button("Save", this::save);
 	Button cancel = new Button("Cancel", this::cancel);
@@ -54,6 +61,17 @@ public class ManageView extends VerticalLayout {
 	BeanFieldGroup<Restaurant> formFieldBindings;
 
 	private void configureComponents() {
+		
+		logout.setIcon(FontAwesome.SIGN_OUT);
+		logout.addClickListener(new ClickListener() {
+
+			@Override
+			public void buttonClick(ClickEvent event) {
+				getUI().setContent(getUI().loginView);
+			}
+			
+		});
+		
 		Random rand = new Random();
 		
 		List<Restaurant> restaurantList = RestaurantService.createService().findAll();
@@ -79,11 +97,25 @@ public class ManageView extends VerticalLayout {
 		setSizeUndefined();
 		layout.setMargin(true);
 
+		HorizontalLayout logoutBar = buildLogout();
 		HorizontalLayout actions = new HorizontalLayout(save, cancel);
+		VerticalLayout mainLayout = new VerticalLayout();
 		actions.setSpacing(true);
-
-		this.addComponents(actions, restaurantName, foodType, hoursOfBusiness, location);
 		
+		mainLayout.addComponents(actions, restaurantName, foodType, hoursOfBusiness, location);
+		this.setSizeUndefined();
+		this.addComponents(logoutBar, mainLayout);
+		this.setComponentAlignment(mainLayout, Alignment.MIDDLE_CENTER);
+		this.setComponentAlignment(logoutBar, Alignment.MIDDLE_RIGHT);
+	}
+	
+	HorizontalLayout buildLogout() {
+		HorizontalLayout logoutBar = new HorizontalLayout();
+		logoutBar.setSizeFull();
+		logoutBar.addComponent(this.logout);
+		logoutBar.setComponentAlignment(logout, Alignment.MIDDLE_RIGHT);
+		
+		return logoutBar; 
 	}
 
 	public void save(Button.ClickEvent event) {
@@ -100,5 +132,8 @@ public class ManageView extends VerticalLayout {
 	public void cancel(Button.ClickEvent event) {
 		Notification.show("Cancelled", Type.TRAY_NOTIFICATION);
 		formFieldBindings = BeanFieldGroup.bindFieldsBuffered(restaurant, this);
+	}
+	public IndexUI getUI() {
+		return (IndexUI) super.getUI();
 	}
 }
