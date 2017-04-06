@@ -100,6 +100,7 @@ public class LoginView extends VerticalLayout {
 						String msg = "Wrong password!";
 			            Notification.show(msg, Type.WARNING_MESSAGE);
 					} else if (flag == 2) {
+						getUI().adminView.refreshAll();
 						getUI().setContent(getUI().adminView);
 					}
 				} else if (select.getValue() == "Restaurant") {
@@ -127,6 +128,7 @@ public class LoginView extends VerticalLayout {
 						String msg = "Wrong password!";
 			            Notification.show(msg, Type.WARNING_MESSAGE);
 					} else if (flag == 2) {
+						getUI().customerView.refreshAll();
 						getUI().setContent(getUI().customerView);
 					}
 					
