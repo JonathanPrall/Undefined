@@ -47,7 +47,7 @@ public class RestaurantService {
     			restaurant.setFoodType(foodTypes[r.nextInt(foodTypes.length)]);
     			restaurant.setLocation(locations[r.nextInt(locations.length)]);
     			restaurant.setHoursOfBusiness(openingHours[r.nextInt(openingHours.length)] + " to " + closingHours[r.nextInt(closingHours.length)]);
-    			restaurant.setStatus(status[1]);
+    			restaurant.setStatus(status[r.nextInt(3)]);
     			
     			restaurantService.save(restaurant);
     		}

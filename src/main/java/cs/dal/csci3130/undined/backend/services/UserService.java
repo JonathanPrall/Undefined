@@ -31,17 +31,6 @@ public class UserService {
     		
     		Random r = new Random(0);
     		
-    		// admin
-    		Admin admin = new Admin();
-    		admin.setId(nextId++);
-    		admin.setPassword(password[0]);
-    		admin.setRole("admin");
-    		admin.setFirstName(firstName[r.nextInt(firstName.length)]);
-    		admin.setLastName(lastName[r.nextInt(lastName.length)]);
-    		admin.setEmail("admin");
-    		admin.setPhone(phone[0]);
-    		userService.save(admin);
-    		
     		// users
     		for(int i = 0; i < 5; i++) {
     			User user = new User();
@@ -54,19 +43,6 @@ public class UserService {
     			user.setPhone(phone[0]);
         		userService.save(user);
     		}
-    		// manager
-    		for(int i = 0; i < 3; i++) {
-    			Manager manager = new Manager();
-    			manager.setId(nextId++);
-    			manager.setPassword(password[1]);
-    			manager.setRole("manager");
-    			manager.setFirstName(firstName[r.nextInt(firstName.length)]);
-    			manager.setLastName(lastName[r.nextInt(lastName.length)]);
-    			manager.setEmail("manager" + Long.toString(nextId));
-    			manager.setPhone(phone[0]);
-        		userService.save(manager);
-    		}
-    		
     		instance = userService;
     	}
     	return instance;
