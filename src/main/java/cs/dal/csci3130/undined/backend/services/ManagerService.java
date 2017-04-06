@@ -2,7 +2,9 @@ package cs.dal.csci3130.undined.backend.services;
 
 import org.apache.commons.beanutils.BeanUtils;
 
+import cs.dal.csci3130.undined.backend.Admin;
 import cs.dal.csci3130.undined.backend.Manager;
+import cs.dal.csci3130.undined.backend.User;
 
 import java.util.*;
 import java.util.logging.Level;
@@ -12,11 +14,41 @@ import java.util.logging.Logger;
 // class and nothing Vaadin specific.
 public class ManagerService {
 
+	private static long nextId = 0;
+	static String[] password = {"admin", "manager","user"};
+	static String[] firstName = {"James", "Mike", "Tony"};
+	static String[] lastName = {"Jackson", "Jackman", "Robert"};
+	static String[] phone = {"900-000-0000"};
+	
     private static ManagerService instance;
 
     private HashMap<Long, Manager> managers = new HashMap<>();
-    private long nextId = 0;
-
+    
+    public static ManagerService createService() {
+    	if(instance == null) {
+    		ManagerService managerService = new ManagerService();
+    		
+    		Random r = new Random(0);
+    		
+    		// manager
+    		for(int i = 0; i < 3; i++) {
+    			Manager manager = new Manager();
+    			manager.setId(nextId++);
+    			manager.setPassword(password[1]);
+    			manager.setRole("manager");
+    			manager.setR_ID("0");
+    			manager.setFirstName(firstName[r.nextInt(firstName.length)]);
+    			manager.setLastName(lastName[r.nextInt(lastName.length)]);
+    			manager.setEmail("manager" + Long.toString(nextId));
+    			manager.setPhone(phone[0]);
+        		managerService.save(manager);
+    		}
+    		
+    		instance = managerService;
+    	}
+    	return instance;
+    }
+    
     //I think this is the search box
     public synchronized List<Manager> findAll(String stringFilter) {
         ArrayList<Manager> arrayList = new ArrayList<Manager>();

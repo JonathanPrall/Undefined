@@ -2,6 +2,8 @@ package cs.dal.csci3130.undined.backend.services;
 
 import org.apache.commons.beanutils.BeanUtils;
 
+import cs.dal.csci3130.undined.backend.Admin;
+import cs.dal.csci3130.undined.backend.Manager;
 import cs.dal.csci3130.undined.backend.User;
 
 import java.util.*;
@@ -12,11 +14,64 @@ import java.util.logging.Logger;
 // class and nothing Vaadin specific.
 public class UserService {
 
+	private static long nextId = 0;
+	static String[] password = {"admin", "manager","user"};
+	static String[] firstName = {"James", "Mike", "Tony"};
+	static String[] lastName = {"Jackson", "Jackman", "Robert"};
+	static String[] phone = {"900-000-0000"};
+	
     private static UserService instance;
 
     private HashMap<Long, User> users = new HashMap<>();
-    private long nextId = 0;
+    
 
+    public static UserService createService() {
+    	if(instance == null) {
+    		UserService userService = new UserService();
+    		
+    		Random r = new Random(0);
+    		
+    		// admin
+    		Admin admin = new Admin();
+    		admin.setId(nextId++);
+    		admin.setPassword(password[0]);
+    		admin.setRole("admin");
+    		admin.setFirstName(firstName[r.nextInt(firstName.length)]);
+    		admin.setLastName(lastName[r.nextInt(lastName.length)]);
+    		admin.setEmail("admin");
+    		admin.setPhone(phone[0]);
+    		userService.save(admin);
+    		
+    		// users
+    		for(int i = 0; i < 5; i++) {
+    			User user = new User();
+    			user.setId(nextId++);
+    			user.setPassword(password[2]);
+    			user.setRole("user");
+    			user.setFirstName(firstName[r.nextInt(firstName.length)]);
+    			user.setLastName(lastName[r.nextInt(lastName.length)]);
+    			user.setEmail("user" + Integer.toString(i));
+    			user.setPhone(phone[0]);
+        		userService.save(user);
+    		}
+    		// manager
+    		for(int i = 0; i < 3; i++) {
+    			Manager manager = new Manager();
+    			manager.setId(nextId++);
+    			manager.setPassword(password[1]);
+    			manager.setRole("manager");
+    			manager.setFirstName(firstName[r.nextInt(firstName.length)]);
+    			manager.setLastName(lastName[r.nextInt(lastName.length)]);
+    			manager.setEmail("manager" + Long.toString(nextId));
+    			manager.setPhone(phone[0]);
+        		userService.save(manager);
+    		}
+    		
+    		instance = userService;
+    	}
+    	return instance;
+    }
+    
     //I think this is the search box.
     public synchronized List<User> findAll(String stringFilter) {
         ArrayList<User> arrayList = new ArrayList<User>();
@@ -46,7 +101,7 @@ public class UserService {
         Collections.sort(arrayList, new Comparator<User>() {
             @Override
             public int compare(User o1, User o2) {
-                return (int) (o2.getId() - o1.getId());
+                return (int) (o1.getId() - o2.getId());
             }
         });
         

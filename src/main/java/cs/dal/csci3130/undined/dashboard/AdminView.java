@@ -51,9 +51,9 @@ public class AdminView extends VerticalLayout {
 	RestaurantRequestForm restaurantRequestForm = new RestaurantRequestForm();
 	RestaurantEditForm restaurantEditForm = new RestaurantEditForm();
 	
-	UserService userService = new UserService();
-	ManagerService managerService = new ManagerService();
-	AdminService adminService =  new AdminService();
+	UserService userService = UserService.createService();
+	ManagerService managerService = ManagerService.createService();
+	AdminService adminService =  AdminService.createService();
 	
 	UserEditForm userEditForm = new UserEditForm();
 	
@@ -61,12 +61,6 @@ public class AdminView extends VerticalLayout {
 		configureComponents();
 		buildLayout();
 	}
-	
-//    @Override
-//    protected void init(VaadinRequest vaadinRequest) {
-//    	configureComponents();
-//    	buildLayout();
-//    }
 
     private void configureComponents() {
 		
@@ -136,7 +130,7 @@ public class AdminView extends VerticalLayout {
 		userAdminList.removeColumn("password");
 		userAdminList.removeColumn("role");
 		userAdminList.setSelectionMode(Grid.SelectionMode.SINGLE);
-		
+		refreshAll();
 	}
     
 
@@ -258,10 +252,10 @@ public class AdminView extends VerticalLayout {
 		userManagerList.setContainerDataSource(new BeanItemContainer<>(
 				Manager.class, managerService.findAll(stringFilter)));
 		
-		/*
+		
 		userAdminList.setContainerDataSource(new BeanItemContainer<>(
 				Admin.class, adminService.findAll(stringFilter)));
-		*/
+		
 		
 		userEditForm.setVisible(false);
 	}
