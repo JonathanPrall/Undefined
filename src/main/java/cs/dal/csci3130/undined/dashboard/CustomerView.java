@@ -48,12 +48,7 @@ public class CustomerView extends VerticalLayout {
 		configureComponents();
 		buildLayout();
 	}
-	
-//    @Override
-//    protected void init(VaadinRequest vaadinRequest) {
-//    	configureComponents();
-//    	buildLayout();
-//    }
+
 
     private void configureComponents() {
 		
