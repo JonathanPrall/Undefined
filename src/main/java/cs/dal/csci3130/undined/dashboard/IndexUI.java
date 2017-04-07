@@ -37,7 +37,7 @@ public class IndexUI extends UI {
 	private void initializeDatabase(){
 		RestaurantService.createService();
 		//MenuService.createService();
-		//Etc....
+		//Etc...
 	}
 	
 	private void initializeLayouts(){
