@@ -25,7 +25,6 @@ public class IndexUI extends UI {
 	public AddMenuItemView addMenuItemView;
 	public RestaurantRegisterView restaurantRegisterView;
 	public CustomerView customerView;
-	public ReviewView reviewView;
 
 	@Override
 	protected void init(VaadinRequest request) {
@@ -49,7 +48,6 @@ public class IndexUI extends UI {
 		addMenuItemView = new AddMenuItemView();
 		restaurantRegisterView = new RestaurantRegisterView();
 		customerView = new CustomerView();
-		reviewView = new ReviewView();
 	}
 	
 	
