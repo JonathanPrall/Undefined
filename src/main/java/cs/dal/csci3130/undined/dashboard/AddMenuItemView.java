@@ -128,7 +128,7 @@ public class AddMenuItemView extends VerticalLayout {
 	
 	private void refreshAll(String stringFilter) {
 		menuList.setContainerDataSource(new BeanItemContainer<>(
-				MenuItem.class, service.findAll(stringFilter, 0)));
+				MenuItem.class, service.findAll(stringFilter)));
 		menuForm.setVisible(false);
 		
 	}

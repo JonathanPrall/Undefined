@@ -58,6 +58,11 @@ public class MenuItem implements Serializable, Cloneable
 	}
 	
 	@Override
+	public String toString(){
+		return name + description;
+	}
+	
+	@Override
     public MenuItem clone() throws CloneNotSupportedException {
         try {
             return (MenuItem) BeanUtils.cloneBean(this);

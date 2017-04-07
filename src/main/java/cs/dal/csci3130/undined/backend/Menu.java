@@ -94,7 +94,7 @@ public class Menu implements Serializable, Cloneable {
         menuItems.put(entry.getId(), entry);
     }
     //I think this is the search box
-    public synchronized List<MenuItem> findAll(String stringFilter, int stat) {
+    public synchronized List<MenuItem> findAll(String stringFilter) {
         ArrayList<MenuItem> arrayList = new ArrayList<MenuItem>();
         
         //For each restaurant
