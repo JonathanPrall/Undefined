@@ -22,6 +22,7 @@ public class ManagePage extends HorizontalLayout {
 				getUI().setContent(getUI().manageView);
 			}
 		});
+		//review
 		this.addReview.addClickListener(new ClickListener() {
 			@Override
 			public void buttonClick(ClickEvent event) {
