@@ -49,7 +49,7 @@ public class RestaurantEditForm extends FormLayout{
 		setSizeUndefined();
 		setMargin(true);
 		
-		HorizontalLayout actions = new HorizontalLayout();
+		HorizontalLayout actions = new HorizontalLayout(save, cancel, reject);
 		actions.setSpacing(true);
 		addComponents(actions, restaurantName, foodType, location, hoursOfBusiness);
 	}
