@@ -39,7 +39,7 @@ public class UserService {
     			user.setRole("user");
     			user.setFirstName(firstName[r.nextInt(firstName.length)]);
     			user.setLastName(lastName[r.nextInt(lastName.length)]);
-    			user.setEmail("user" + Integer.toString(i));
+    			user.setEmail("user" + i);
     			user.setPhone(phone[0]);
         		userService.save(user);
     		}

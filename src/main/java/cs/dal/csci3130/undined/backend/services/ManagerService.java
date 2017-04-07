@@ -39,7 +39,7 @@ public class ManagerService {
     			manager.setR_ID("0");
     			manager.setFirstName(firstName[r.nextInt(firstName.length)]);
     			manager.setLastName(lastName[r.nextInt(lastName.length)]);
-    			manager.setEmail("manager" + Long.toString(nextId));
+    			manager.setEmail("manager" + i);
     			manager.setPhone(phone[0]);
         		managerService.save(manager);
     		}

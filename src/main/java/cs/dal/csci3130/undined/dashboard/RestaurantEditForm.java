@@ -1,6 +1,7 @@
 package cs.dal.csci3130.undined.dashboard;
 
 import com.vaadin.event.ShortcutAction;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
@@ -48,11 +49,9 @@ public class RestaurantEditForm extends FormLayout{
 		setSizeUndefined();
 		setMargin(true);
 		
-		HorizontalLayout actions = new HorizontalLayout(save, reject, cancel);
+		HorizontalLayout actions = new HorizontalLayout();
 		actions.setSpacing(true);
-		
 		addComponents(actions, restaurantName, foodType, location, hoursOfBusiness);
-		
 	}
 	
 	public void save(Button.ClickEvent event) {	
