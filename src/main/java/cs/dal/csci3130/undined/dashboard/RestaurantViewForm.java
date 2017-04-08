@@ -39,7 +39,7 @@ public class RestaurantViewForm extends FormLayout{
 	private void configureComponents() {
 		
 		dine.setStyleName(ValoTheme.BUTTON_PRIMARY);
-		dine.setClickShortcut(ShortcutAction.KeyCode.ENTER);
+		//dine.setClickShortcut(ShortcutAction.KeyCode.ENTER);
 	}
 	
 	private void buildLayout() {
