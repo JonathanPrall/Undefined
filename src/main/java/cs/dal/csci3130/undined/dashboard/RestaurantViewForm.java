@@ -11,20 +11,23 @@ import com.vaadin.ui.themes.ValoTheme;
 import com.vaadin.v7.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.v7.data.fieldgroup.FieldGroup;
 import com.vaadin.v7.data.fieldgroup.FieldGroup.CommitException;
+import com.vaadin.v7.data.util.BeanItemContainer;
 import com.vaadin.v7.ui.DateField;
+import com.vaadin.v7.ui.Grid;
 import com.vaadin.v7.ui.TextField;
 
 import cs.dal.csci3130.undined.backend.Restaurant;
+import cs.dal.csci3130.undined.backend.services.MenuService;
+import cs.dal.csci3130.undined.backend.services.RestaurantService;
+import cs.dal.csci3130.undined.backend.Menu;
+import cs.dal.csci3130.undined.backend.MenuItem;
 
 public class RestaurantViewForm extends FormLayout{
 	
 	Button dine = new Button("Dine", this::dine);
 	Button cancel = new Button("Cancel", this::cancel);
 	
-	TextField restaurantName = new TextField("Restaurant");
-	TextField foodType = new TextField("Food Type");
-	TextField location = new TextField("Location");
-	TextField hoursOfBusiness = new TextField("Working hours");
+	Grid restaurantMenu = new Grid();
 	
 	Restaurant restaurant;
 	
@@ -40,6 +43,12 @@ public class RestaurantViewForm extends FormLayout{
 		
 		dine.setStyleName(ValoTheme.BUTTON_PRIMARY);
 		//dine.setClickShortcut(ShortcutAction.KeyCode.ENTER);
+		
+		restaurantMenu.setContainerDataSource(new BeanItemContainer<>(MenuItem.class));
+		
+		restaurantMenu.setColumnOrder("name","description","price");
+		restaurantMenu.removeColumn("id");
+		restaurantMenu.setSelectionMode(Grid.SelectionMode.SINGLE);
 	}
 	
 	private void buildLayout() {
@@ -49,7 +58,7 @@ public class RestaurantViewForm extends FormLayout{
 		HorizontalLayout actions = new HorizontalLayout(dine, cancel);
 		actions.setSpacing(true);
 		
-		addComponents(actions, restaurantName, foodType, location, hoursOfBusiness);
+		addComponents(actions, restaurantMenu);
 		
 	}
 	
@@ -60,11 +69,13 @@ public class RestaurantViewForm extends FormLayout{
 		getUI().customerView.refreshAll();
 	}
 	
-	void edit(Restaurant restaurant) {
+	void getMenu(Restaurant restaurant) {
 		this.restaurant = restaurant;
 		if(restaurant != null) {
-			formFieldBindings = BeanFieldGroup.bindFieldsBuffered(restaurant, this);
-			restaurantName.focus();
+			restaurantMenu.setContainerDataSource(new BeanItemContainer<>(
+					//Appearently we are hard coded to only allow one menu to exist for some reason
+					//So this code will need to change when that gets fixed	
+					MenuItem.class, Menu.createMenu().findAll()));
 		}
 		setVisible(restaurant != null);
 	}

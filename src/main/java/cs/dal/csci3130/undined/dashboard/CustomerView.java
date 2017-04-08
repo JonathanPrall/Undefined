@@ -72,7 +72,7 @@ public class CustomerView extends VerticalLayout {
 		restaurantAcceptedList.removeColumn("id");
 		restaurantAcceptedList.setSelectionMode(Grid.SelectionMode.SINGLE);
 		restaurantAcceptedList.addSelectionListener(
-				e -> viewForm.edit((Restaurant) restaurantAcceptedList.getSelectedRow()));
+				e -> viewForm.getMenu((Restaurant) restaurantAcceptedList.getSelectedRow()));
 		
 		viewForm.setVisible(false);
 		
