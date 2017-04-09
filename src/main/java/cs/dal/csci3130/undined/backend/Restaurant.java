@@ -113,7 +113,7 @@ public class Restaurant implements Serializable, Cloneable {
 
     @Override
     public String toString() {
-        return restaurantName;
+        return restaurantName + foodType;
     }
 
 }

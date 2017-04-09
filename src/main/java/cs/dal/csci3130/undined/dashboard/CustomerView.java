@@ -63,14 +63,19 @@ public class CustomerView extends VerticalLayout {
     	});
     	
     	restaurantSearchBar.setInputPrompt("Search Restaurants...");
-    	restaurantSearchBar.addTextChangeListener(e -> refreshAll());
-		
+    	restaurantSearchBar.addValueChangeListener(e -> refreshAll());
+    	
 		restaurantAcceptedList.setContainerDataSource(new BeanItemContainer<>(Restaurant.class));
 		restaurantAcceptedList.setColumnOrder("id", "restaurantName","foodType","location","hoursOfBusiness");
 		restaurantAcceptedList.removeColumn("status");
+		restaurantAcceptedList.removeColumn("menuId");
+		restaurantAcceptedList.removeColumn("id");
 		restaurantAcceptedList.setSelectionMode(Grid.SelectionMode.SINGLE);
 		restaurantAcceptedList.addSelectionListener(
-				e -> viewForm.edit((Restaurant) restaurantAcceptedList.getSelectedRow()));
+				e -> viewForm.getMenu((Restaurant) restaurantAcceptedList.getSelectedRow()));
+		
+		viewForm.setVisible(false);
+		
 		refreshAll();		
 	}
     
