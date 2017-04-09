@@ -51,6 +51,7 @@ public class Menu implements Serializable, Cloneable {
     			menuItem.setName(name[r.nextInt(name.length)]);
     			menuItem.setDescription(description[r.nextInt(description.length)]);
     			menuItem.setPrice(price[r.nextInt(price.length)]);
+    			menuItem.setStatus(r.nextInt(3));
     			menu.save(menuItem);
     		}
     		instance = menu;
@@ -130,13 +131,16 @@ public class Menu implements Serializable, Cloneable {
         //Return it
         return arrayList;
     }
-    public synchronized List<MenuItem> findAll() {
+    public synchronized List<MenuItem> findAll(int stat) {
         ArrayList<MenuItem> arrayList = new ArrayList<MenuItem>();
         
         //For each restaurant
         for (MenuItem menuItem : menuItems.values()) {
             try {
-            	arrayList.add(menuItem.clone());
+            	if(menuItem.getStatus() == stat)
+            		arrayList.add(menuItem.clone());
+            	if(stat == -1)
+            		arrayList.add(menuItem.clone());
 
             } catch (CloneNotSupportedException ex) {
                 Logger.getLogger(Menu.class.getName()).log(

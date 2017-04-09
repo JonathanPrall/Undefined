@@ -12,8 +12,16 @@ public class MenuItem implements Serializable, Cloneable
 	private String name = "";
 	private String description = "";
 	private float price = Float.POSITIVE_INFINITY;
+	private int status = 0;
 	//private picture
 
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	
 	public MenuItem() {
 	}
 	//Creates the menu item with all information

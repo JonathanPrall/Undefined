@@ -26,6 +26,7 @@ public class IndexUI extends UI {
 	public ManageView manageView;
 	public AddMenuItemView addMenuItemView;
 	public RestaurantRegisterView restaurantRegisterView;
+	public ManageOrder manageOrder;
 	public CustomerView customerView;
 	private NavigationBar navbar;
 	
@@ -53,6 +54,7 @@ public class IndexUI extends UI {
 		manageView = new ManageView();
 		addMenuItemView = new AddMenuItemView();
 		restaurantRegisterView = new RestaurantRegisterView();
+		manageOrder = new ManageOrder();
 		customerView = new CustomerView();
 		navbar = new NavigationBar();
 	}
