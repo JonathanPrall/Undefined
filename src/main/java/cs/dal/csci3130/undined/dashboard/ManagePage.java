@@ -17,21 +17,21 @@ public class ManagePage extends HorizontalLayout {
 			@Override
 			public void buttonClick(ClickEvent event) {
 
-				getUI().setContent(getUI().manageView);
+				getUI().changePage(getUI().manageView);
 			}
 		});
 		this.addMenuItem.addClickListener(new ClickListener() {
 			@Override
 			public void buttonClick(ClickEvent event) {
 				
-				getUI().setContent(getUI().addMenuItemView);
+				getUI().changePage(getUI().addMenuItemView);
 			}
 		});
 		this.requestRegist.addClickListener(new ClickListener() {
 			@Override
 			public void buttonClick(ClickEvent event) {
 
-				getUI().setContent(getUI().restaurantRegisterView);
+				getUI().changePage(getUI().restaurantRegisterView);
 			}
 		});
 

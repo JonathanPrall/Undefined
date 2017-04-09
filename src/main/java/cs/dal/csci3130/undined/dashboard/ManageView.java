@@ -45,10 +45,6 @@ import com.vaadin.v7.data.fieldgroup.BeanFieldGroup;
 @Widgetset("com.vaadin.v7.Vaadin7WidgetSet")
 
 public class ManageView extends VerticalLayout {
-	
-	Button logout = new Button("Log out");
-	
-	
 	Button save = new Button("Save", this::save);
 	Button cancel = new Button("Cancel", this::cancel);
 	TextField restaurantName = new TextField("Restaurant Name");
@@ -60,18 +56,7 @@ public class ManageView extends VerticalLayout {
 
 	BeanFieldGroup<Restaurant> formFieldBindings;
 
-	private void configureComponents() {
-		
-		logout.setIcon(FontAwesome.SIGN_OUT);
-		logout.addClickListener(new ClickListener() {
-
-			@Override
-			public void buttonClick(ClickEvent event) {
-				getUI().setContent(getUI().loginView);
-			}
-			
-		});
-		
+	private void configureComponents() {		
 		Random rand = new Random();
 		
 		List<Restaurant> restaurantList = RestaurantService.createService().findAll();
@@ -97,25 +82,14 @@ public class ManageView extends VerticalLayout {
 		setSizeUndefined();
 		layout.setMargin(true);
 
-		HorizontalLayout logoutBar = buildLogout();
 		HorizontalLayout actions = new HorizontalLayout(save, cancel);
 		VerticalLayout mainLayout = new VerticalLayout();
 		actions.setSpacing(true);
 		
 		mainLayout.addComponents(actions, restaurantName, foodType, hoursOfBusiness, location);
 		this.setSizeUndefined();
-		this.addComponents(logoutBar, mainLayout);
+		this.addComponents(mainLayout);
 		this.setComponentAlignment(mainLayout, Alignment.MIDDLE_CENTER);
-		this.setComponentAlignment(logoutBar, Alignment.MIDDLE_RIGHT);
-	}
-	
-	HorizontalLayout buildLogout() {
-		HorizontalLayout logoutBar = new HorizontalLayout();
-		logoutBar.setSizeFull();
-		logoutBar.addComponent(this.logout);
-		logoutBar.setComponentAlignment(logout, Alignment.MIDDLE_RIGHT);
-		
-		return logoutBar; 
 	}
 
 	public void save(Button.ClickEvent event) {

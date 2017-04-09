@@ -34,8 +34,6 @@ import cs.dal.csci3130.undined.backend.services.UserService;
 
 
 public class AdminView extends VerticalLayout {
-
-	Button logout = new Button("Log out");
 	
 	TextField restaurantSearchBar = new TextField();
 	Grid restaurantRequestList = new Grid();
@@ -63,18 +61,6 @@ public class AdminView extends VerticalLayout {
 	}
 
     private void configureComponents() {
-		
-    	//
-    	logout.setIcon(FontAwesome.SIGN_OUT);
-    	logout.addClickListener(new ClickListener() {
-
-			@Override
-			public void buttonClick(ClickEvent event) {
-				getUI().setContent(getUI().loginView);
-			}
-    		
-    	});
-    	//
     	
     	restaurantSearchBar.setInputPrompt("Search Restaurants...");
     	restaurantSearchBar.addTextChangeListener(e -> refreshAll());
@@ -143,28 +129,19 @@ public class AdminView extends VerticalLayout {
 		
 		
 		//Build pages
-		HorizontalLayout logoutBar = buildLogout();
 		HorizontalLayout restaurantPage = buildRestaurantPage();
 		HorizontalLayout userPage = buildUserPage();
 		
 		navigationTab.addTab(restaurantPage, "Restaurant");
 		navigationTab.addTab(userPage, "User");
 		
-		this.addComponents(logoutBar, navigationTab);
+		this.addComponents(navigationTab);
 		
 //		
 //		VerticalLayout mainLayout = new VerticalLayout(navigationTab);
 //		setContent(mainLayout);
 	}
 
-	HorizontalLayout buildLogout() {
-		HorizontalLayout logoutBar = new HorizontalLayout();
-		logoutBar.setSizeFull();
-		logoutBar.addComponent(this.logout);
-		logoutBar.setComponentAlignment(logout, Alignment.MIDDLE_RIGHT);
-		
-		return logoutBar; 
-	}
 	
 	HorizontalLayout buildRestaurantPage(){
 		HorizontalLayout searchBar = new HorizontalLayout(restaurantSearchBar);

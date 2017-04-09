@@ -29,8 +29,6 @@ import cs.dal.csci3130.undined.backend.services.RestaurantService;
 
 public class RestaurantRegisterView extends VerticalLayout{
 	
-	Button logout = new Button("Log out");
-	
 	TextField restaurantName = new TextField("Restaurant Name");
 	TextField foodType = new TextField("Food Type");
 	TextField location = new TextField("Location");
@@ -48,17 +46,6 @@ public class RestaurantRegisterView extends VerticalLayout{
 	}
 	
 	private void configureComponents() {
-		
-		logout.setIcon(FontAwesome.SIGN_OUT);
-		logout.addClickListener(new ClickListener() {
-
-			@Override
-			public void buttonClick(ClickEvent event) {
-				getUI().setContent(getUI().loginView);
-			}
-			
-		});
-		
 		confirm.addClickListener(e -> {
 			service.save(new Restaurant(service.nextID(), restaurantName.getValue(),foodType.getValue(),location.getValue(),hoursOfBusiness.getValue()));
 			getList();
@@ -71,9 +58,6 @@ public class RestaurantRegisterView extends VerticalLayout{
 	}
 	
 	private void buildLayout() {
-		
-		HorizontalLayout logoutBar = buildLogout();
-		
 		VerticalLayout form = new VerticalLayout();
 		VerticalLayout gridF = new VerticalLayout();
 		HorizontalLayout main = new HorizontalLayout();
@@ -89,16 +73,7 @@ public class RestaurantRegisterView extends VerticalLayout{
 		main.setExpandRatio(form, (float)0.20);
 		
 //		this.setExpandRatio(grid, 1);
-		this.addComponents(logoutBar, main);
-	}
-	
-	HorizontalLayout buildLogout() {
-		HorizontalLayout logoutBar = new HorizontalLayout();
-		logoutBar.setSizeFull();
-		logoutBar.addComponent(this.logout);
-		logoutBar.setComponentAlignment(logout, Alignment.MIDDLE_RIGHT);
-		
-		return logoutBar; 
+		this.addComponents(main);
 	}
 	
 	private void getList(){

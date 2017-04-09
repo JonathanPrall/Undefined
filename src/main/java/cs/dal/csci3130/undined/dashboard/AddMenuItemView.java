@@ -27,10 +27,7 @@ import cs.dal.csci3130.undined.backend.MenuItem;
 import cs.dal.csci3130.undined.backend.Menu;
 
 
-public class AddMenuItemView extends VerticalLayout {
-
-	Button logout = new Button("Log out");
-	
+public class AddMenuItemView extends VerticalLayout {	
 	
 	TextField filter = new TextField();
 	Grid menuList = new Grid();
@@ -55,16 +52,6 @@ public class AddMenuItemView extends VerticalLayout {
 //    }
 
     private void configureComponents() {
-		
-    	logout.setIcon(FontAwesome.SIGN_OUT);
-		logout.addClickListener(new ClickListener() {
-
-			@Override
-			public void buttonClick(ClickEvent event) {
-				getUI().setContent(getUI().loginView);
-			}
-			
-		});
     	
     	edit.addClickListener(e -> menuForm.edit(new MenuItem()));
 		
@@ -103,7 +90,6 @@ public class AddMenuItemView extends VerticalLayout {
 		lists.setSizeFull();
 		left.setExpandRatio(lists, 1);
 		
-		HorizontalLayout logoutBar = buildLogout();
 		HorizontalLayout main = new HorizontalLayout();
 		
 		
@@ -111,15 +97,7 @@ public class AddMenuItemView extends VerticalLayout {
 		main.setSizeFull();
 		main.setExpandRatio(left, 1);
 		
-		this.addComponents(logoutBar, main);
-	}
-	HorizontalLayout buildLogout() {
-		HorizontalLayout logoutBar = new HorizontalLayout();
-		logoutBar.setSizeFull();
-		logoutBar.addComponent(this.logout);
-		logoutBar.setComponentAlignment(logout, Alignment.MIDDLE_RIGHT);
-		
-		return logoutBar; 
+		this.addComponents(main);
 	}
 
 	void refreshAll() {
