@@ -9,10 +9,10 @@
     <class>db.Review</class>
     <class>db.User</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/kutesa?zeroDateTimeBehavior=convertToNull"/>
-      <property name="javax.persistence.jdbc.user" value="class"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://db.cs.dal.ca:3306/kutesa?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.user" value="kutesa"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="password"/>
+      <property name="javax.persistence.jdbc.password" value="B00688784"/>
     </properties>
   </persistence-unit>
 	
