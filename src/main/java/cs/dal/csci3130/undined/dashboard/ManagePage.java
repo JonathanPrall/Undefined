@@ -39,7 +39,7 @@ public class ManagePage extends HorizontalLayout {
 			@Override
 			public void buttonClick(ClickEvent event) {
 
-				getUI().setContent(getUI().manageOrder);
+				getUI().changePage(getUI().manageOrder);
 			}
 		});
 		

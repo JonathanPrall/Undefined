@@ -19,7 +19,6 @@ import cs.dal.csci3130.undined.backend.Menu;
 import cs.dal.csci3130.undined.backend.MenuItem;
 
 public class ManageOrder extends VerticalLayout {
-	Button logout = new Button("Log out");
 	
 	TextField orderSearchBar = new TextField();
 	Grid orderRequestList = new Grid();
@@ -35,16 +34,6 @@ public class ManageOrder extends VerticalLayout {
 
 
 	private void configureComponent() {
-		
-		logout.setIcon(FontAwesome.SIGN_OUT);
-    	logout.addClickListener(new ClickListener() {
-
-			@Override
-			public void buttonClick(ClickEvent event) {
-				getUI().setContent(getUI().loginView);
-			}
-    		
-    	});
     	
     	orderSearchBar.setInputPrompt("Search...");
     	orderSearchBar.addTextChangeListener(e -> refreshAll());
@@ -75,8 +64,6 @@ public class ManageOrder extends VerticalLayout {
 	
 	private void buildLayout() {
 		
-		HorizontalLayout logoutBar = buildLogout();
-		
 		
 		HorizontalLayout searchBar = new HorizontalLayout(orderSearchBar);
 		searchBar.setWidth("100%");
@@ -100,16 +87,7 @@ public class ManageOrder extends VerticalLayout {
 		navigation.addComponent(navigationTab);
 		navigation.setSizeFull();
 		
-		this.addComponents(logoutBar, searchBar, navigation);
-	}
-	
-	private HorizontalLayout buildLogout() {
-		HorizontalLayout logoutBar = new HorizontalLayout();
-		logoutBar.setSizeFull();
-		logoutBar.addComponent(this.logout);
-		logoutBar.setComponentAlignment(logout, Alignment.MIDDLE_RIGHT);
-		
-		return logoutBar; 
+		this.addComponents(searchBar, navigation);
 	}
 
 	private VerticalLayout generateTab(Grid t) {
