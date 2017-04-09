@@ -28,7 +28,6 @@ public class RestaurantViewForm extends FormLayout{
 	Button cancel = new Button("Cancel", this::cancel);
 	
 	Grid restaurantMenu = new Grid();
-	Menu menu = Menu.createMenu();
 	
 	Restaurant restaurant;
 	
@@ -49,6 +48,7 @@ public class RestaurantViewForm extends FormLayout{
 		
 		restaurantMenu.setColumnOrder("name","description","price");
 		restaurantMenu.removeColumn("id");
+		restaurantMenu.removeColumn("status");
 		restaurantMenu.setSelectionMode(Grid.SelectionMode.SINGLE);
 	}
 	
@@ -76,7 +76,7 @@ public class RestaurantViewForm extends FormLayout{
 			restaurantMenu.setContainerDataSource(new BeanItemContainer<>(
 					//Appearently we are hard coded to only allow one menu to exist for some reason
 					//So this code will need to change when that gets fixed	
-					MenuItem.class, menu.findAll()));
+					MenuItem.class, Menu.createMenu().findAll(-1)));
 		}
 		setVisible(restaurant != null);
 	}

@@ -47,25 +47,28 @@ public class ManageOrder extends VerticalLayout {
     	});
     	
     	orderSearchBar.setInputPrompt("Search...");
-//    	orderSearchBar.addTextChangeListener(e -> refreshAll());
+    	orderSearchBar.addTextChangeListener(e -> refreshAll());
     	
     	orderRequestList.setContainerDataSource(new BeanItemContainer<>(MenuItem.class));
 		orderRequestList.setColumnOrder("name","description","price");
 		orderRequestList.removeColumn("id");
+		orderRequestList.removeColumn("status");
 		orderRequestList.setSelectionMode(Grid.SelectionMode.SINGLE);
 //		refreshAll();
 		
 		orderAcceptList.setContainerDataSource(new BeanItemContainer<>(MenuItem.class));
 		orderAcceptList.setColumnOrder("name","description","price");
 		orderAcceptList.removeColumn("id");
+		orderAcceptList.removeColumn("status");
 		orderAcceptList.setSelectionMode(Grid.SelectionMode.SINGLE);
 //		refreshAll();
 		
 		orderRejectList.setContainerDataSource(new BeanItemContainer<>(MenuItem.class));
 		orderRejectList.setColumnOrder("name","description","price");
 		orderRejectList.removeColumn("id");
+		orderRejectList.removeColumn("status");
 		orderRejectList.setSelectionMode(Grid.SelectionMode.SINGLE);
-//		refreshAll();
+		refreshAll();
 		
 		
 	}
@@ -126,8 +129,11 @@ public class ManageOrder extends VerticalLayout {
 	
 	private void refreshOrders(String value) {
 		this.orderRequestList.setContainerDataSource(new BeanItemContainer<>(
-				MenuItem.class, getUI().customerView.viewForm.menu.findAll(value)));
-		
+				MenuItem.class, Menu.createMenu().findAll(0)));
+		this.orderAcceptList.setContainerDataSource(new BeanItemContainer<>(
+				MenuItem.class, Menu.createMenu().findAll(1)));
+		this.orderRejectList.setContainerDataSource(new BeanItemContainer<>(
+				MenuItem.class, Menu.createMenu().findAll(2)));
 	}
 
 

@@ -65,6 +65,7 @@ public class CustomerView extends VerticalLayout {
     	restaurantSearchBar.setInputPrompt("Search Restaurants...");
     	restaurantSearchBar.addValueChangeListener(e -> refreshAll());
     	
+    	Restaurant temp = (Restaurant)restaurantAcceptedList.getSelectedRow();
 		restaurantAcceptedList.setContainerDataSource(new BeanItemContainer<>(Restaurant.class));
 		restaurantAcceptedList.setColumnOrder("id", "restaurantName","foodType","location","hoursOfBusiness");
 		restaurantAcceptedList.removeColumn("status");
