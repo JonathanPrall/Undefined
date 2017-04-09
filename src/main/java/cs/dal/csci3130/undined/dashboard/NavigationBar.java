@@ -52,7 +52,7 @@ public class NavigationBar extends HorizontalLayout
 		back.setVisible(false);
 		
 		this.addComponent(back);
-    	this.setComponentAlignment(back, Alignment.MIDDLE_CENTER);
+    	this.setComponentAlignment(back, Alignment.MIDDLE_LEFT);
 	}
 
 	public void showBackButton(){
