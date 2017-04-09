@@ -45,7 +45,6 @@ public class LoginView extends VerticalLayout {
 	final Label title = new Label("Undined");
 	final TextField userName = new TextField("Username");
 	final PasswordField password = new PasswordField("Password");
-	ComboBox select = null;
 	final CheckBox rememberMe = new CheckBox("Remember me", true);
 	final Button signIn = new Button("Sign In");
 	
@@ -77,11 +76,6 @@ public class LoginView extends VerticalLayout {
 		password.setIcon(FontAwesome.LOCK);
 		password.addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
 		
-		select = new ComboBox("User Type");
-		select.setPlaceholder("Select One");
-		select.setEmptySelectionAllowed(false);
-		select.setItems("Customer", "Restaurant", "Admin");
-		
 		signIn.addStyleName(ValoTheme.BUTTON_PRIMARY);
 		signIn.setClickShortcut(KeyCode.ENTER);
 		signIn.focus();
@@ -90,48 +84,47 @@ public class LoginView extends VerticalLayout {
 
 			@Override
 			public void buttonClick(com.vaadin.ui.Button.ClickEvent event) {
-				if(select.getValue() == "Admin") {
-					int flag = getUI().adminView.adminService.findOne(userName.getValue(), password.getValue());
-					if (flag == 0) {
-						String msg = "Account doesn't exist!";
-			            Notification.show(msg, Type.WARNING_MESSAGE);
-						
-					} else if (flag == 1) {
-						String msg = "Wrong password!";
-			            Notification.show(msg, Type.WARNING_MESSAGE);
-					} else if (flag == 2) {
-						getUI().adminView.refreshAll();
-						getUI().changePage(getUI().adminView);
-					}
-				} else if (select.getValue() == "Restaurant") {
+				//Querys the accounts without need to specify user role
+				//Ordering of the queries is so in theory, the smallest tables are queried first
+				
+				//Query admin accounts
+				int flag = getUI().adminView.adminService.findOne(userName.getValue(), password.getValue());
+				if (flag == 0) {
 					
-					int flag = getUI().adminView.managerService.findOne(userName.getValue(), password.getValue());
+					//If the account doesn't exist try manager accounts
+					flag = getUI().adminView.managerService.findOne(userName.getValue(), password.getValue());
 					if (flag == 0) {
-						String msg = "Account doesn't exist!";
-			            Notification.show(msg, Type.WARNING_MESSAGE);
+						
+						//If the account doesn't exist try user accounts
+						flag = getUI().adminView.userService.findOne(userName.getValue(), password.getValue());
+						if (flag == 0) {
+							String msg = "Account doesn't exist!";
+				            Notification.show(msg, Type.WARNING_MESSAGE);
+							
+						} else if (flag == 1) {
+							String msg = "Wrong password!";
+				            Notification.show(msg, Type.WARNING_MESSAGE);
+						} else if (flag == 2) {
+							getUI().customerView.refreshAll();
+							clearLoginInfo();
+							getUI().changePage(getUI().customerView);
+						}
 						
 					} else if (flag == 1) {
 						String msg = "Wrong password!";
 			            Notification.show(msg, Type.WARNING_MESSAGE);
 					} else if (flag == 2) {
+						clearLoginInfo();
 						getUI().changePage(getUI().managePage);
 					}
 					
-				} else if (select.getValue() == "Customer") {
-					
-					int flag = getUI().adminView.userService.findOne(userName.getValue(), password.getValue());
-					if (flag == 0) {
-						String msg = "Account doesn't exist!";
-			            Notification.show(msg, Type.WARNING_MESSAGE);
-						
-					} else if (flag == 1) {
-						String msg = "Wrong password!";
-			            Notification.show(msg, Type.WARNING_MESSAGE);
-					} else if (flag == 2) {
-						getUI().customerView.refreshAll();
-						getUI().changePage(getUI().customerView);
-					}
-					
+				} else if (flag == 1) {
+					String msg = "Wrong password!";
+		            Notification.show(msg, Type.WARNING_MESSAGE);
+				} else if (flag == 2) {
+					getUI().adminView.refreshAll();
+					clearLoginInfo();
+					getUI().changePage(getUI().adminView);
 				}
 			}
 		});
@@ -144,7 +137,7 @@ public class LoginView extends VerticalLayout {
 		VerticalLayout fields = new VerticalLayout();
 		fields.setSpacing(true);
 		
-		fields.addComponents(title, userName, password, select, rememberMe, signIn);
+		fields.addComponents(title, userName, password, rememberMe, signIn);
 		fields.setComponentAlignment(rememberMe, Alignment.MIDDLE_LEFT);
 		fields.setComponentAlignment(signIn, Alignment.MIDDLE_LEFT);
 		
@@ -162,10 +155,16 @@ public class LoginView extends VerticalLayout {
 		this.setSizeFull();
 		this.addComponent(loginPanel);
 		this.setComponentAlignment(loginPanel, Alignment.MIDDLE_CENTER);
-		
-//		setContent(mainLayout);
 	}
 
+	private void clearLoginInfo(){
+		password.clear();
+		
+		if(!rememberMe.booleanValue()){
+			userName.clear();
+		}
+	}
+	
 	public IndexUI getUI() {
 		return (IndexUI) super.getUI();
 	}
