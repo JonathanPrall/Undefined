@@ -29,6 +29,7 @@ public class IndexUI extends UI {
 	public ManageOrder manageOrder;
 	public CustomerView customerView;
 	private NavigationBar navbar;
+	public ReviewView reviewView;
 	
 	private Layout current;
 	private Layout previous;
@@ -57,6 +58,7 @@ public class IndexUI extends UI {
 		manageOrder = new ManageOrder();
 		customerView = new CustomerView();
 		navbar = new NavigationBar();
+		reviewView = new ReviewView();
 	}
 	
 	public void changePage(){

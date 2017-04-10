@@ -12,6 +12,7 @@ public class ManagePage extends HorizontalLayout {
 	public Button addMenuItem = new Button("Add Menu");
 	public Button requestRegist = new Button("Register Restaurants");
 	public Button orderRequests = new Button("View orders");
+	public Button reviewView = new Button("View reviews");
 
 	public ManagePage() {
 		this.manageInfo.addClickListener(new ClickListener() {
@@ -42,6 +43,14 @@ public class ManagePage extends HorizontalLayout {
 				getUI().changePage(getUI().manageOrder);
 			}
 		});
+		this.reviewView.addClickListener(new ClickListener() {
+			@Override
+			public void buttonClick(ClickEvent event) {
+
+				getUI().changePage(getUI().reviewView);
+			}
+		});
+		
 		
 
 //		this.setSizeUndefined();
@@ -51,6 +60,7 @@ public class ManagePage extends HorizontalLayout {
 		this.setComponentAlignment(addMenuItem, Alignment.MIDDLE_CENTER);
 		this.setComponentAlignment(requestRegist, Alignment.MIDDLE_CENTER);
 		this.setComponentAlignment(orderRequests, Alignment.MIDDLE_CENTER);
+		this.setComponentAlignment(reviewView, Alignment.MIDDLE_CENTER);
 		
 	}
 
