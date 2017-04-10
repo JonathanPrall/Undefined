@@ -1,4 +1,4 @@
-package cs.dal.csci3130.Undined.backend;
+package cs.dal.csci3130.undined.backend;
 
 import static org.junit.Assert.*;
 
@@ -9,68 +9,62 @@ public class MenuItemTest {
 	
 	@Test
 	public void testMenuItem() {
-		boolean except = true;
-		float i = 233;
-		MenuItem a = new MenuItem("name","description",i);
+		boolean expect = true;
+		MenuItem a = new MenuItem(0, "name","description", (float) 1.0);
 		boolean result = (a instanceof MenuItem);
-		assertFalse(except != result);
+		assertFalse(expect != result);
+	}
+	
+	@Test
+	public void testGetId() {
+		MenuItem a = new MenuItem(0, "name", "desc", (float) 1.0);
+		assertEquals(0, a.getId());
+	}
+
+	@Test
+	public void testSetId() {
+		MenuItem a = new MenuItem();
+		a.setName("name");
+		assertEquals("name", a.getName());
 	}
 
 	@Test
 	public void testGetName() {
-		boolean except = true;
-		float i = 233;
-		MenuItem a = new MenuItem("name","description",i);
-		boolean result = a.getName().equals("name");
-		assertFalse(except != result);
+		MenuItem a = new MenuItem(0, "name", "desc", (float) 1.0);
+		assertEquals("name", a.getName());
 	}
 
 	@Test
 	public void testSetName() {
-		boolean except = true;
-		float i = 233;
-		MenuItem a = new MenuItem("name","description",i);
-		a.setName("secondName");
-		boolean result = a.getName().equals("secondName");
-		assertFalse(except != result);
+		MenuItem a = new MenuItem();
+		a.setName("name");
+		assertEquals("name", a.getName());
 	}
 
 	@Test
 	public void testGetDescription() {
-		boolean except = true;
-		float i = 233;
-		MenuItem a = new MenuItem("name","description",i);
-		boolean result = a.getDescription().equals("description");
-		assertFalse(except != result);
+		MenuItem a = new MenuItem(0, "name", "desc", (float) 1.0);
+		assertEquals("desc", a.getDescription());
 	}
 
 	@Test
 	public void testSetDescription() {
-		boolean except = true;
-		float i = 233;
-		MenuItem a = new MenuItem("name","description",i);
-		a.setDescription("secondDescription");
-		boolean result = a.getDescription().equals("secondDescription");
-		assertFalse(except != result);
+		MenuItem a = new MenuItem();
+		a.setDescription("desc");
+		assertEquals("desc", a.getDescription());
 	}
 
 	@Test
 	public void testGetPrice() {
-		boolean except = true;
-		float i = 233;
-		MenuItem a = new MenuItem("name","description",i);
-		boolean result = a.getPrice() == 233;
-		assertFalse(except != result);
+		MenuItem a = new MenuItem(0, "name", "desc", (float) 1.0);
+		assertEquals((float) 1.0, a.getPrice(), 0);
 	}
 
 	@Test
 	public void testSetPrice() {
-		boolean except = true;
-		float i = 233;
-		MenuItem a = new MenuItem("name","description",i);
-		a.setPrice(332);
-		boolean result = a.getPrice() == 332;
-		assertFalse(except != result);
+		MenuItem a = new MenuItem();
+		a.setPrice((float) 1.0);
+		assertEquals(1, a.getPrice(), 0);
 	}
 
 }

@@ -10,7 +10,8 @@ import java.io.Serializable;
 public class Restaurant implements Serializable, Cloneable {
 
     private long id;
-
+    private long menuId;
+    
     private String restaurantName = "";
     private String foodType = "";
     private String location = "";
@@ -28,7 +29,18 @@ public class Restaurant implements Serializable, Cloneable {
     	this.setLocation(location);
     	this.setHoursOfBusiness(hoursOfBusiness);
     }
-    // Get and set status 
+    
+    public long getMenuId()
+	{
+		return menuId;
+	}
+
+	public void setMenuId(long menuId)
+	{
+		this.menuId = menuId;
+	}
+
+	// Get and set status 
 	public int getStatus() {
 		return status;
 	}
@@ -101,7 +113,7 @@ public class Restaurant implements Serializable, Cloneable {
 
     @Override
     public String toString() {
-        return restaurantName;
+        return restaurantName + foodType;
     }
 
 }

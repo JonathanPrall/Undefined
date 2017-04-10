@@ -3,3 +3,11 @@ install:
 - mvn install
 jdk:
 - oraclejdk8
+deploy:
+  provider: heroku
+  api_key:
+    secure: BhqNdKA71PcdYvn0UE5Ck15PP3RqQbBHgHwRKo/J1j1KblQ1rzY4j64dJnEKWbadAfdm5sq656hnVX7rJZJUAvicH9fK59Zyuq4njQ40GioVUnQJYMIIwKVDPvX+j5/SDPe9Ipr44WwkoO9lVGptNYs99Pkmbb5cOIiuaAlCWnnQiYtwCEYiDMso+keTJtiDiGf7U7X8FrjVr8V7T0+qoDpKWT5hsFqUpK+JSI6HFHazKzsaf+4HEbigaxwV5hob1cZHIfsYIFRMOa6sv2FcAdvu48vLYyMM9ZR0aDVTwB8lN5FtUz2RAWiAkfgpgr8U3B0vW9f5a7Lgg3joHiVdxfzVbGGwxCE+WB9bWliHFTkRgPqKIQCWvgn+n8RF9GlVglYbxy7KFy1u4En/XjQpcYvNCxPRQrglqEIiwu0g6duSMpdsbgaHCvMdNJVaexTsHolU8KDMRpTSUYK02Un9hVoT6KSO1XjLye2p48pn2B1s6OEzBE/TF32s907IWoVzSUuLHp341VZ2K7rhXwP2+CyJdATgycMrdmmcA9IZO2+31Nr/qZoSUp4ZwBVUFbDnfvC4kHbgubvz8AMN8d9u7RtuagSjL+1/OadpAlSsf1sVowKkGlspE4mmXQAS5267CMbGP/2JaPi7JPOBmI8VmLwtnoRmF0xaT8CJSmvsFlo=
+  app: csci3130undined
+  on:
+    repo: JonathanPrall/Undefined
+    branch: Iteration2-master

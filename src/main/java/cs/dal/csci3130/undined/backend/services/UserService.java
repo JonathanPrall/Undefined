@@ -1,6 +1,10 @@
-package cs.dal.csci3130.undined.backend;
+package cs.dal.csci3130.undined.backend.services;
 
 import org.apache.commons.beanutils.BeanUtils;
+
+import cs.dal.csci3130.undined.backend.Admin;
+import cs.dal.csci3130.undined.backend.Manager;
+import cs.dal.csci3130.undined.backend.User;
 
 import java.util.*;
 import java.util.logging.Level;
@@ -10,38 +14,40 @@ import java.util.logging.Logger;
 // class and nothing Vaadin specific.
 public class UserService {
 
+	private static long nextId = 0;
+	static String[] password = {"admin", "manager","user"};
+	static String[] firstName = {"James", "Mike", "Tony"};
+	static String[] lastName = {"Jackson", "Jackman", "Robert"};
+	static String[] phone = {"900-000-0000"};
+	
     private static UserService instance;
 
-    //Code that originally filled the database with fake contacts
-    /*
-    public static ContactService createDemoService() {
-        if (instance == null) {
-
-            final ContactService contactService = new ContactService();
-
-            Random r = new Random(0);
-            Calendar cal = Calendar.getInstance();
-            for (int i = 0; i < 100; i++) {
-                Contact contact = new Contact();
-                contact.setFirstName(fnames[r.nextInt(fnames.length)]);
-                contact.setLastName(lnames[r.nextInt(fnames.length)]);
-                contact.setStartDate(cal.getTime());
-                contact.setTask("+ 358 555 " + (100 + r.nextInt(900)));
-                cal.set(1930 + r.nextInt(70),
-                        r.nextInt(11), r.nextInt(28));
-                contact.setEndDate(cal.getTime());
-                contactService.save(contact);
-            }
-            instance = contactService;
-        }
-
-        return instance;
-    }
-	*/
-
     private HashMap<Long, User> users = new HashMap<>();
-    private long nextId = 0;
+    
 
+    public static UserService createService() {
+    	if(instance == null) {
+    		UserService userService = new UserService();
+    		
+    		Random r = new Random(0);
+    		
+    		// users
+    		for(int i = 0; i < 5; i++) {
+    			User user = new User();
+    			user.setId(nextId++);
+    			user.setPassword(password[2]);
+    			user.setRole("user");
+    			user.setFirstName(firstName[r.nextInt(firstName.length)]);
+    			user.setLastName(lastName[r.nextInt(lastName.length)]);
+    			user.setEmail("user" + i);
+    			user.setPhone(phone[0]);
+        		userService.save(user);
+    		}
+    		instance = userService;
+    	}
+    	return instance;
+    }
+    
     //I think this is the search box.
     public synchronized List<User> findAll(String stringFilter) {
         ArrayList<User> arrayList = new ArrayList<User>();
@@ -71,14 +77,29 @@ public class UserService {
         Collections.sort(arrayList, new Comparator<User>() {
             @Override
             public int compare(User o1, User o2) {
-                return (int) (o2.getId() - o1.getId());
+                return (int) (o1.getId() - o2.getId());
             }
         });
         
         //Return it
         return arrayList;
     }
-
+    
+    public synchronized int findOne(String email, String password) {
+    	// 0 username not found
+    	// 1 username found but password wrong
+    	// 2 passed
+    	int flag = 0;
+    	for (User user: users.values()) {
+    		if (user.getEmail().equals(email)) {
+    			flag = 1;
+    			if (user.getPassword().equals(password)) {
+    				flag = 2;
+    			}
+    		}
+    	}
+    	return flag;
+    }
     public synchronized long count() {
         return users.size();
     }
