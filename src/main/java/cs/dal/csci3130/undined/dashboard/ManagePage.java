@@ -55,7 +55,7 @@ public class ManagePage extends HorizontalLayout {
 
 //		this.setSizeUndefined();
 		this.setSizeFull();
-		this.addComponents(manageInfo, addMenuItem, requestRegist, orderRequests);
+		this.addComponents(manageInfo, addMenuItem, requestRegist, orderRequests, reviewViews);
 		this.setComponentAlignment(manageInfo, Alignment.MIDDLE_CENTER);
 		this.setComponentAlignment(addMenuItem, Alignment.MIDDLE_CENTER);
 		this.setComponentAlignment(requestRegist, Alignment.MIDDLE_CENTER);
